@@ -30,7 +30,7 @@ function App() {
 
   useEffect(() => {
     const saved = localStorage.getItem("colorMode");
-    if (saved === "dark") setIsDarkMode(true);
+    if (saved === "dark" || saved === null) setIsDarkMode(true);
   }, []);
 
   useEffect(() => {
