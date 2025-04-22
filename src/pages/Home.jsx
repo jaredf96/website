@@ -138,7 +138,7 @@ const Home = () => {
             Projects
           </h2>
           <p className="text-lg text-[--color-muted] mb-6">
-            Showcasing some of my best work — clean, performant, and accessible code.
+            Showcasing some of the projects I've worked on.
           </p>
           <Link to="/projects">
             <button className="px-6 py-3 bg-[--color-accent] text-white rounded-[--radius-base] hover:bg-[--color-accent-hover] transition-all duration-[--duration-medium] ease-[--ease-snappy] hover:scale-105 shadow-[--shadow-soft]">
@@ -165,9 +165,7 @@ const Home = () => {
             About Me
           </h2>
           <p className="text-lg text-[--color-muted] mb-6">
-            I'm a full-stack developer who loves creating modern web experiences
-            with clean, maintainable code. I value performance, accessibility,
-            and thoughtful design.
+            I'm a full-stack developer who truly enjoys to code.
           </p>
           <Link to="/about">
             <button className="px-6 py-3 bg-[--color-accent] text-white rounded-[--radius-base] hover:bg-[--color-accent-hover] transition-all duration-[--duration-medium] ease-[--ease-snappy] hover:scale-105 shadow-[--shadow-soft]">
