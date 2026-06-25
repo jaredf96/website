@@ -96,8 +96,8 @@ export const projects = [
           title: "Demo Walkthrough",
           body: [
             "A walkthrough of a scan: discovering resources, reading the cost and risk ranking, and stepping through a guided cleanup.",
-            "(Demo video / screenshots to be embedded here.)",
           ],
+          media: { kind: "video", label: "Demo walkthrough — coming soon" },
         },
       ],
     },
@@ -166,8 +166,8 @@ export const projects = [
           title: "Demo Output",
           body: [
             "Example output showing a scored resume with per-skill explanations and tailoring suggestions.",
-            "(Sample report / screenshots to be embedded here.)",
           ],
+          media: { kind: "image", label: "Sample scored output — coming soon" },
         },
       ],
     },
@@ -214,8 +214,8 @@ export const projects = [
           title: "Dashboard Preview",
           body: [
             "The dashboard prioritizes clarity: tolerance bands, trend lines over time, and an unambiguous pass/fail read.",
-            "(Dashboard screenshots to be embedded here.)",
           ],
+          media: { kind: "image", label: "Dashboard preview — coming soon" },
         },
         {
           id: "notes",
@@ -269,8 +269,8 @@ export const projects = [
           title: "Bot Demo",
           body: [
             "Example alerts and the configuration behind them.",
-            "(Demo clip / screenshots to be embedded here.)",
           ],
+          media: { kind: "image", label: "Bot in action — coming soon" },
         },
       ],
     },
@@ -331,6 +331,15 @@ export const featuredProjects = projects.filter((p) => p.group === "featured");
 export const smallerBuilds = projects.filter((p) => p.group === "smaller");
 
 export const getProject = (slug) => projects.find((p) => p.slug === slug);
+
+/** Previous/next project for case-study footer navigation. */
+export const getAdjacent = (slug) => {
+  const i = projects.findIndex((p) => p.slug === slug);
+  return {
+    prev: i > 0 ? projects[i - 1] : null,
+    next: i >= 0 && i < projects.length - 1 ? projects[i + 1] : null,
+  };
+};
 
 /** True when a public, intentionally-clean repo should be linked. */
 export const hasPublicRepo = (project) => Boolean(project.repo);

@@ -24,10 +24,10 @@ function ScrollManager() {
         const el = document.getElementById(id);
         if (el) el.scrollIntoView();
       };
-      // Try now and again after lazy content mounts.
+      // Retry across lazy mount + scroll-reveal settle so the offset is stable.
       scrollToHash();
-      const t = setTimeout(scrollToHash, 150);
-      return () => clearTimeout(t);
+      const timers = [120, 350, 600].map((ms) => setTimeout(scrollToHash, ms));
+      return () => timers.forEach(clearTimeout);
     }
     window.scrollTo(0, 0);
   }, [pathname, hash]);
