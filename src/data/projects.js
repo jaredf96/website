@@ -96,8 +96,8 @@ export const projects = [
           title: "Demo Walkthrough",
           body: [
             "A walkthrough of a scan: discovering resources, reading the cost and risk ranking, and stepping through a guided cleanup.",
-            "(Demo video / screenshots to be embedded here.)",
           ],
+          media: { kind: "video", label: "Demo walkthrough — coming soon" },
         },
       ],
     },
@@ -166,8 +166,8 @@ export const projects = [
           title: "Demo Output",
           body: [
             "Example output showing a scored resume with per-skill explanations and tailoring suggestions.",
-            "(Sample report / screenshots to be embedded here.)",
           ],
+          media: { kind: "image", label: "Sample scored output — coming soon" },
         },
       ],
     },
@@ -214,8 +214,8 @@ export const projects = [
           title: "Dashboard Preview",
           body: [
             "The dashboard prioritizes clarity: tolerance bands, trend lines over time, and an unambiguous pass/fail read.",
-            "(Dashboard screenshots to be embedded here.)",
           ],
+          media: { kind: "image", label: "Dashboard preview — coming soon" },
         },
         {
           id: "notes",
@@ -269,7 +269,91 @@ export const projects = [
           title: "Bot Demo",
           body: [
             "Example alerts and the configuration behind them.",
-            "(Demo clip / screenshots to be embedded here.)",
+          ],
+          media: { kind: "image", label: "Bot in action — coming soon" },
+        },
+      ],
+    },
+  },
+
+  {
+    slug: "plane-crash-analysis",
+    name: "Plane Crash Analysis",
+    tagline: "Failure-mode themes from a century of crashes",
+    group: "smaller",
+    year: "2023",
+    status: "public",
+    repo: null,
+    repoNote: null,
+    summary:
+      "An exploratory analysis of ~5,200 aviation accidents (1908–2009) that uses unsupervised NLP to surface recurring failure-mode themes from free-text crash summaries.",
+    context:
+      "Originally a coursework project — reworked: cleaned data handling, reframed as descriptive theme discovery (not prediction), with written findings and honest limitations.",
+    role: "Solo.",
+    tech: ["Python", "Pandas", "scikit-learn", "TF-IDF", "K-Means", "PCA", "Matplotlib"],
+    highlights: [
+      "Cleaned a messy historical dataset (year/country parsing, safe survivor derivation)",
+      "TF-IDF + K-Means clustering over thousands of crash summaries",
+      "Five interpretable failure-mode themes (engine, weather, terrain, takeoff, approach)",
+      "Reframed 'cause prediction' as honest nearest-theme assignment",
+    ],
+    metrics: [],
+    actions: [
+      { kind: "case-study", label: "View Case Study", to: "/work/plane-crash-analysis" },
+      {
+        kind: "notes",
+        label: "Notebook",
+        to: "/notebooks/plane-crash-analysis.ipynb",
+        external: true,
+      },
+    ],
+    caseStudy: {
+      sections: [
+        {
+          id: "overview",
+          title: "Overview",
+          body: [
+            "A reworked coursework project. It analyzes roughly a century of aviation accidents (1908–2009) and asks a focused question: what recurring failure modes show up across thousands of free-text crash summaries?",
+            "Rather than predicting causes, it uses unsupervised NLP to let the themes emerge — and is careful to say what the method can and can't claim.",
+          ],
+        },
+        {
+          id: "data",
+          title: "Data & Cleaning",
+          body: [
+            "The raw dataset is messy: inconsistent dates, free-text locations, and sparse early records. Getting it analysis-ready was most of the work.",
+          ],
+          bullets: [
+            "Parsed crash year and country from inconsistent Date/Location strings",
+            "Coerced Aboard/Fatalities/Ground to numerics",
+            "Derived Survivors = Aboard − Fatalities — only where both are known, clipped at zero so bad records can't go negative",
+          ],
+        },
+        {
+          id: "themes",
+          title: "Failure-Mode Themes",
+          body: [
+            "TF-IDF over the crash summaries feeds a K-Means model (k=5); a 2-D projection makes the clusters legible. The five clusters are interpretable and stable:",
+          ],
+          bullets: [
+            "Engine / mechanical failure (often around takeoff)",
+            "Approach & landing (runway, altitude, control)",
+            "Weather & poor visibility (fog, adverse conditions)",
+            "En-route loss over terrain (mountains, ocean, disappearance)",
+            "Cargo / short-flight takeoff incidents",
+          ],
+          media: { kind: "image", label: "Cluster projection (TF-IDF + K-Means) — coming soon" },
+        },
+        {
+          id: "findings",
+          title: "What It Shows",
+          body: [
+            "The themes line up with well-known aviation risk categories, which is a good sanity check that the unsupervised method found something real.",
+          ],
+          bullets: [
+            "Weather and terrain dominate en-route losses; mechanical issues cluster around takeoff",
+            "Limitations: k was chosen heuristically; summaries are post-hoc human text (reporting bias); the result is descriptive, not causal",
+            "Next steps: silhouette/elbow to justify k, topic modeling (NMF/LDA), and tracking how the theme mix shifts by decade",
           ],
         },
       ],
@@ -331,6 +415,15 @@ export const featuredProjects = projects.filter((p) => p.group === "featured");
 export const smallerBuilds = projects.filter((p) => p.group === "smaller");
 
 export const getProject = (slug) => projects.find((p) => p.slug === slug);
+
+/** Previous/next project for case-study footer navigation. */
+export const getAdjacent = (slug) => {
+  const i = projects.findIndex((p) => p.slug === slug);
+  return {
+    prev: i > 0 ? projects[i - 1] : null,
+    next: i >= 0 && i < projects.length - 1 ? projects[i + 1] : null,
+  };
+};
 
 /** True when a public, intentionally-clean repo should be linked. */
 export const hasPublicRepo = (project) => Boolean(project.repo);
