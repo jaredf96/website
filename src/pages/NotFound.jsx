@@ -1,16 +1,16 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (
-    <div className="text-center py-20">
-      <h1 className="text-4xl font-bold mb-4 text-gray-800 dark:text-gray-100">404 - Page Not Found</h1>
-      <p className="text-lg mb-8 text-gray-600 dark:text-gray-300">
+    <div className="text-center py-20 min-h-[60vh] flex flex-col items-center justify-center">
+      <p className="text-6xl font-bold text-accent mb-4">404</p>
+      <h1 className="text-3xl font-bold mb-4 text-text">Page Not Found</h1>
+      <p className="text-lg mb-8 text-muted">
         Sorry, the page you're looking for doesn't exist.
       </p>
       <Link
         to="/"
-        className="py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-300"
+        className="py-2 px-5 bg-accent text-white rounded-base hover:bg-accent-hover transition-colors duration-(--duration-medium)"
       >
         Go Home
       </Link>

@@ -3,9 +3,25 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite + React</title>
+  <meta name="description" content="Jared Fulk — Computer Science graduate specializing in data science and software engineering. Projects, resume, and contact." />
+  <meta name="theme-color" content="#1a1a24" />
+  <meta property="og:title" content="jareds.codes — Jared Fulk" />
+  <meta property="og:description" content="Portfolio of Jared Fulk: data science & software engineering projects." />
+  <meta property="og:type" content="website" />
+  <title>jareds.codes — Jared Fulk</title>
+  <script>
+    // Apply theme before paint to avoid a flash of the wrong color scheme.
+    (function () {
+      try {
+        var saved = localStorage.getItem("colorMode");
+        if (saved === "dark" || saved === null) {
+          document.documentElement.classList.add("dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
 </head>
 
 <body>
