@@ -1,12 +1,8 @@
-
-import React from "react";
-import { Github, Mail, Linkedin, FileText } from "lucide-react";
-
 function About() {
   return (
     <div className="space-y-12">
       {/* Hero section */}
-      <section className="bg-[--color-surface-accent] rounded-xl p-8 shadow-[--shadow-medium]">
+      <section className="bg-surface-accent rounded-xl p-8 shadow-medium">
         <h1 className="text-4xl font-bold mb-4">About Me</h1>
         <p className="text-xl opacity-80 max-w-3xl">
           Computer Science graduate with expertise in Data Science and Software Engineering
@@ -14,8 +10,8 @@ function About() {
       </section>
 
       {/* Bio section */}
-      <section className="bg-[--color-surface-card] rounded-xl p-8 shadow-[--shadow-soft]">
-        <h2 className="text-2xl font-semibold mb-6 text-[--color-accent]">Professional Background</h2>
+      <section className="bg-surface-card rounded-xl p-8 shadow-soft">
+        <h2 className="text-2xl font-semibold mb-6 text-accent">Professional Background</h2>
         <div className="space-y-6">
           <p>
             I am a Computer Science grad with a BS degree. I specialized in data science and software engineering.
@@ -38,8 +34,8 @@ function About() {
       </section>
 
       {/* Technical Skills */}
-      <section className="bg-[--color-surface-card] rounded-xl p-8 shadow-[--shadow-soft]">
-        <h2 className="text-2xl font-semibold mb-6 text-[--color-accent]">Technical Expertise</h2>
+      <section className="bg-surface-card rounded-xl p-8 shadow-soft">
+        <h2 className="text-2xl font-semibold mb-6 text-accent">Technical Expertise</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
             <h3 className="text-xl font-medium">Artificial Intelligence</h3>

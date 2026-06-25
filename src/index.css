@@ -4,20 +4,30 @@
 @theme {
   --font-sans: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
   --font-mono: "Fira Code", "Roboto Mono", monospace;
-  /* Light mode (beige background) */
-  --color-surface: oklch(0.97 0.02 85);
-  /* soft beige */
-  --color-surface-light: oklch(0.99 0.01 95);
-  /* near-white warm tint */
-  --color-text: #111827;
-  /* dark gray for contrast */
-  --color-muted: oklch(0.55 0.01 250);
-  /* Accent colors */
-  --color-accent: oklch(0.78 0.15 260);
-  --color-accent-hover: oklch(0.7 0.19 260);
+
+  /* Light mode — cool neutral base */
+  --color-surface: oklch(0.985 0.002 264);
+  /* near-white, faint cool tint */
+  --color-surface-light: oklch(1 0 0);
+  /* pure white for subtle elevation */
+  --color-surface-card: oklch(1 0 0);
+  /* card background */
+  --color-surface-accent: oklch(0.96 0.012 264);
+  /* faint tinted panel for hero/accent areas */
+  --color-border: oklch(0.92 0.004 264);
+  /* hairline borders / dividers */
+  --color-text: oklch(0.21 0.02 264);
+  /* deep slate for contrast */
+  --color-muted: oklch(0.5 0.02 264);
+
+  /* Accent — confident indigo */
+  --color-accent: oklch(0.55 0.17 264);
+  --color-accent-hover: oklch(0.49 0.18 264);
+
   /* UI tokens */
   --radius-base: 0.5rem;
   --shadow-soft: 0 2px 8px oklch(0 0 0 / 0.1);
+  --shadow-medium: 0 6px 20px oklch(0 0 0 / 0.15);
   --duration-medium: 300ms;
   --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
 
@@ -26,72 +36,92 @@
   --duration-spin: 300ms;
 }
 
-/* Dark mode overrides */
+/* Dark mode — deep slate base */
 .dark {
-  --color-surface: oklch(0.17 0.01 250);
-  --color-surface-light: oklch(0.12 0.01 250);
-  --color-text: oklch(0.95 0.01 250);
-  --color-muted: oklch(0.75 0.01 250);
+  --color-surface: oklch(0.18 0.015 264);
+  --color-surface-light: oklch(0.21 0.016 264);
+  --color-surface-card: oklch(0.225 0.018 264);
+  --color-surface-accent: oklch(0.26 0.03 264);
+  --color-border: oklch(0.32 0.02 264);
+  --color-text: oklch(0.96 0.004 264);
+  --color-muted: oklch(0.72 0.015 264);
+  --color-accent: oklch(0.72 0.15 264);
+  --color-accent-hover: oklch(0.78 0.15 264);
+  --shadow-soft: 0 2px 8px oklch(0 0 0 / 0.4);
+  --shadow-medium: 0 10px 30px oklch(0 0 0 / 0.55);
 }
 
-/* Base styling */
-:root {
-  font-family: var(--font-sans);
-  color-scheme: light dark;
-  background-color: var(--color-surface);
-  color: var(--color-text);
+/* Base element styles — in @layer base so utility classes (bg-*, text-*,
+   border-*) can override them per-component. */
+@layer base {
+  :root {
+    font-family: var(--font-sans);
+    color-scheme: light dark;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    font-weight: bold;
+    letter-spacing: 0.01em;
+  }
+
+  /* Buttons control their own colors via utilities; just reset the basics. */
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  pre {
+    font-family: var(--font-mono);
+    padding: 1rem;
+    border-radius: var(--radius-base);
+    overflow-x: auto;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  line-height: 1.5;
+/* Code block scrollbar styling */
+pre::-webkit-scrollbar {
+  height: 8px;
 }
 
-/* Links */
-a {
-  color: inherit;
-  text-decoration: none;
-  font-weight: 500;
+pre::-webkit-scrollbar-track {
+  background: oklch(0.2 0 0);
+  border-radius: 4px;
 }
 
-a:hover {
-  text-decoration: underline;
-  text-underline-offset: 2px;
+pre::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 4px;
 }
 
-/* Buttons */
-button {
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: 500;
-  padding: 0.6em 1.2em;
-  border-radius: var(--radius-base);
-  background-color: var(--color-accent);
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background-color 150ms var(--ease-snappy);
+pre::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-hover);
 }
 
-button:hover {
-  background-color: var(--color-accent-hover);
-}
-
-/* Headings */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-  font-weight: bold;
-  letter-spacing: 0.01em;
-}
-
-/* Custom animations */
+/* Scroll-reveal animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -113,106 +143,13 @@ h6 {
     transform var(--duration-fade) var(--ease-snappy);
 }
 
-/* Improved button styles with overlay effect */
-button {
-  position: relative;
-  overflow: hidden;
-}
-
-button::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: oklch(1 0 0 / 0.1);
-  transform: translateX(-100%);
-  transition: transform var(--duration-medium) var(--ease-snappy);
-}
-
-button:hover::after {
-  transform: translateX(0);
-}
-
-/* Loading animation */
-@keyframes pulse {
-
-  0%,
-  100% {
-    opacity: 1;
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .section-animate {
+    opacity: 1 !important;
   }
 
-  50% {
-    opacity: 0.5;
+  .animate-fadeIn {
+    animation: none;
   }
-}
-
-@keyframes bounce {
-
-  0%,
-  100% {
-    transform: translateY(-25%);
-    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-  }
-
-  50% {
-    transform: translateY(0);
-    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  }
-}
-
-.animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-.animate-bounce {
-  animation: bounce 1s infinite;
-}
-
-/* Code display styles */
-pre {
-  font-family: var(--font-mono);
-  padding: 1rem;
-  border-radius: var(--radius-base);
-  overflow-x: auto;
-  line-height: 1.6;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-/* Code block with scrollbar styling */
-pre::-webkit-scrollbar {
-  height: 8px;
-}
-
-pre::-webkit-scrollbar-track {
-  background: oklch(0.2 0 0);
-  border-radius: 4px;
-}
-
-pre::-webkit-scrollbar-thumb {
-  background: var(--color-accent);
-  border-radius: 4px;
-}
-
-pre::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent-hover);
-}
-
-/* Project card transition */
-.project-card {
-  transition: transform 0.3s var(--ease-snappy),
-    box-shadow 0.3s var(--ease-snappy);
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
-}
-
-/* Code expansion/collapse animation */
-.code-container {
-  transition: max-height 0.5s var(--ease-snappy),
-    opacity 0.3s var(--ease-snappy);
-  overflow: hidden;
 }
