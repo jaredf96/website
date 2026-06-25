@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { navItems } from "../navItems";
+import ThemeToggle from "./layout/ThemeToggle";
 
 const SidebarMenu = ({ toggleDarkMode, isDarkMode, open, setOpen }) => {
   const closeBtnRef = useRef(null);
@@ -79,14 +80,8 @@ const SidebarMenu = ({ toggleDarkMode, isDarkMode, open, setOpen }) => {
         </nav>
 
         {/* Dark mode toggle */}
-        <div className="mt-6">
-          <button
-            onClick={toggleDarkMode}
-            className="w-full py-2 px-4 bg-accent text-white rounded-base hover:bg-accent-hover transition duration-(--duration-medium) ease-snappy hover:scale-105"
-            aria-label="Toggle dark mode"
-          >
-            {isDarkMode ? "Light Mode" : "Dark Mode"}
-          </button>
+        <div className="mt-6 border-t border-border pt-4">
+          <ThemeToggle isDark={isDarkMode} onToggle={toggleDarkMode} withLabel />
         </div>
       </aside>
     </>

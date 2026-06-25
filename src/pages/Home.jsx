@@ -1,131 +1,107 @@
-// Home.jsx
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { ArrowRight } from "lucide-react";
+import { featuredProjects } from "../data/projects";
+import ProjectCard from "../components/work/ProjectCard";
+import FadeIn from "../components/motion/FadeIn";
+import { StaggerContainer, StaggerItem } from "../components/motion/Stagger";
 
-const Home = () => {
-  // Reveal sections on scroll
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-fadeIn");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+const btnPrimary =
+  "inline-flex items-center gap-2 rounded-base bg-accent px-5 py-2.5 text-sm font-medium text-white transition-colors duration-(--duration-medium) hover:bg-accent-hover";
+const btnOutline =
+  "inline-flex items-center gap-2 rounded-base border border-border px-5 py-2.5 text-sm font-medium text-text transition-colors duration-(--duration-medium) hover:border-accent hover:text-accent";
 
-    const hiddenElements = document.querySelectorAll(".section-animate");
-    hiddenElements.forEach((el) => observer.observe(el));
-
-    return () => {
-      hiddenElements.forEach((el) => observer.unobserve(el));
-    };
-  }, []);
-
+export default function Home() {
   return (
-    <div className="w-full relative z-0">
-      {/* Hero Section */}
-      <section className="min-h-screen grid place-items-center bg-surface text-text text-center px-6 section-animate opacity-0">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-5xl font-bold mb-4">
-            Hi, I'm{" "}
-            <span className="text-accent relative group">
-              Jared
-              <span className="absolute bottom-0 left-0 w-full h-1 bg-accent transform scale-x-0 transition-transform duration-(--duration-medium) group-hover:scale-x-100"></span>
-            </span>
-          </h1>
+    <div className="py-10 sm:py-14">
+      {/* Hero */}
+      <section className="grid items-center gap-10 py-8 sm:py-12 lg:grid-cols-[1.25fr_1fr]">
+        <StaggerContainer stagger={0.09} amount={0.4}>
+          <StaggerItem as="p" className="text-sm font-medium text-accent">
+            Hi, I'm Jared 👋
+          </StaggerItem>
+          <StaggerItem
+            as="h1"
+            className="mt-3 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl"
+          >
+            I build software that solves{" "}
+            <span className="text-accent">real problems</span>.
+          </StaggerItem>
+          <StaggerItem as="p" className="mt-5 max-w-xl text-lg text-muted">
+            Computer Science grad focused on software engineering and data
+            science. I like designing systems, testing them properly, and being
+            able to explain the tradeoffs.
+          </StaggerItem>
+          <StaggerItem className="mt-8 flex flex-wrap gap-3">
+            <Link to="/work" className={btnPrimary}>
+              View My Work <ArrowRight size={16} />
+            </Link>
+            <Link to="/contact" className={btnOutline}>
+              Get in Touch
+            </Link>
+          </StaggerItem>
+        </StaggerContainer>
 
-          <p className="text-lg text-muted mb-8">
-            A developer passionate about building great software.
-          </p>
-
-          {/* Profile Image */}
-          <div className="relative z-0 w-80 h-80 mx-auto mb-8 rounded-full overflow-hidden border-4 border-accent shadow-soft hover:shadow-lg transition-all duration-(--duration-medium) hover:scale-105">
-            <img
-              src="/canon.jpg"
-              alt="Portrait of Jared Fulk"
-              className="w-full h-full object-cover"
+        <FadeIn delay={0.15} className="justify-self-center lg:justify-self-end">
+          <div className="relative">
+            <div
+              aria-hidden="true"
+              className="absolute -inset-3 rounded-3xl bg-accent/10 blur-2xl"
             />
+            <div className="relative h-60 w-60 overflow-hidden rounded-2xl ring-1 ring-border shadow-medium sm:h-72 sm:w-72">
+              <img
+                src="/canon.jpg"
+                alt="Portrait of Jared Fulk"
+                className="h-full w-full object-cover"
+              />
+            </div>
           </div>
-
-          {/* CTA buttons */}
-          <div className="flex flex-wrap justify-center gap-4 mt-6">
-            <Link to="/projects">
-              <button className="px-6 py-3 bg-accent text-white rounded-base hover:bg-accent-hover transition-all duration-(--duration-medium) hover:scale-105 shadow-soft">
-                View My Work
-              </button>
-            </Link>
-            <Link to="/contact">
-              <button className="px-6 py-3 bg-transparent border-2 border-accent text-accent rounded-base hover:bg-accent hover:text-white transition-all duration-(--duration-medium) hover:scale-105">
-                Get in Touch
-              </button>
-            </Link>
-          </div>
-        </div>
+        </FadeIn>
       </section>
 
-      {/* Section Divider */}
-      <div className="relative h-24">
-        <div className="absolute inset-0 bg-surface">
-          <svg className="absolute bottom-0 w-full h-16 text-surface-light" viewBox="0 0 1440 48" fill="currentColor" preserveAspectRatio="none">
-            <path d="M0,0 C480,48 960,48 1440,0 L1440,48 L0,48 Z"></path>
-          </svg>
-        </div>
-      </div>
-
-      {/* Projects Section */}
-      <section className="py-24 bg-surface-light text-text text-center px-6 section-animate opacity-0">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold mb-4 flex items-center justify-center">
-            <span className="mr-3 text-accent">📁</span>
-            Projects
-          </h2>
-          <p className="text-lg text-muted mb-6">
-            Showcasing some of the projects I've worked on.
-          </p>
-          <Link to="/projects">
-            <button className="px-6 py-3 bg-accent text-white rounded-base hover:bg-accent-hover transition-all duration-(--duration-medium) ease-snappy hover:scale-105 shadow-soft">
-              View Projects
-            </button>
+      {/* Selected Work */}
+      <section className="mt-16 sm:mt-24">
+        <div className="flex items-end justify-between gap-4">
+          <h2 className="text-2xl font-bold sm:text-3xl">Selected Work</h2>
+          <Link
+            to="/work"
+            className="group inline-flex items-center gap-1 text-sm font-medium text-accent"
+          >
+            View all
+            <ArrowRight
+              size={16}
+              className="transition-transform duration-(--duration-medium) group-hover:translate-x-0.5"
+            />
           </Link>
         </div>
+
+        <StaggerContainer className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {featuredProjects.map((project) => (
+            <StaggerItem key={project.slug} className="h-full">
+              <ProjectCard project={project} variant="smaller" />
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
       </section>
 
-      {/* Section Divider */}
-      <div className="relative h-24">
-        <div className="absolute inset-0 bg-surface-light">
-          <svg className="absolute bottom-0 w-full h-16 text-surface" viewBox="0 0 1440 48" fill="currentColor" preserveAspectRatio="none">
-            <path d="M0,48 C480,0 960,0 1440,48 L1440,48 L0,48 Z"></path>
-          </svg>
-        </div>
-      </div>
-
-      {/* About Section */}
-      <section className="py-24 bg-surface text-text text-center px-6 section-animate opacity-0">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold mb-4 flex items-center justify-center">
-            <span className="mr-3 text-accent">👨‍💻</span>
-            About Me
-          </h2>
-          <p className="text-lg text-muted mb-6">
-            I'm a full-stack developer who genuinely loves to code.
-          </p>
-          <Link to="/about">
-            <button className="px-6 py-3 bg-accent text-white rounded-base hover:bg-accent-hover transition-all duration-(--duration-medium) ease-snappy hover:scale-105 shadow-soft">
-              Learn More
-            </button>
+      {/* Closing CTA */}
+      <FadeIn
+        as="section"
+        className="mt-20 rounded-2xl border border-border bg-surface-accent p-8 text-center sm:p-12"
+      >
+        <h2 className="text-2xl font-bold sm:text-3xl">Let's build something.</h2>
+        <p className="mx-auto mt-3 max-w-xl text-muted">
+          I'm open to roles and collaborations across software and data. Happy to
+          walk through any of these projects in depth.
+        </p>
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <Link to="/contact" className={btnPrimary}>
+            Get in Touch
+          </Link>
+          <Link to="/resume" className={btnOutline}>
+            View Résumé
           </Link>
         </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-8 text-center text-sm text-muted">
-        <p>© {new Date().getFullYear()} jareds.codes. All rights reserved.</p>
-      </footer>
+      </FadeIn>
     </div>
   );
-};
-
-export default Home;
+}
