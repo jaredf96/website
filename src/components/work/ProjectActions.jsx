@@ -43,10 +43,27 @@ export default function ProjectActions({ project }) {
         const cls = primary
           ? `${BASE} bg-accent text-white hover:bg-accent-hover`
           : `${BASE} border border-border text-muted hover:text-accent hover:border-accent`;
-        return (
-          <Link key={`${action.kind}-${i}`} to={action.to} className={cls}>
+        const inner = (
+          <>
             <Icon size={16} />
             <span>{action.label}</span>
+          </>
+        );
+        // External/static files (e.g. a .ipynb) open in a new tab; internal
+        // routes use the client router.
+        return action.external ? (
+          <a
+            key={`${action.kind}-${i}`}
+            href={action.to}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cls}
+          >
+            {inner}
+          </a>
+        ) : (
+          <Link key={`${action.kind}-${i}`} to={action.to} className={cls}>
+            {inner}
           </Link>
         );
       })}
