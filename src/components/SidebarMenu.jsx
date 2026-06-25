@@ -1,58 +1,74 @@
 // SidebarMenu.jsx
+import { useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-
-const navItems = [
-  { name: "Home", path: "/", icon: "🏠" },
-  { name: "Resume", path: "/resume", icon: "📄" },
-  { name: "Projects", path: "/projects", icon: "📁" },
-  { name: "Contact", path: "/contact", icon: "📇" },
-];
+import { navItems } from "../navItems";
 
 const SidebarMenu = ({ toggleDarkMode, isDarkMode, open, setOpen }) => {
-  // Use props instead of local state
+  const closeBtnRef = useRef(null);
+
+  // Close on Escape and move focus to the close button when opened
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    document.addEventListener("keydown", onKey);
+    closeBtnRef.current?.focus();
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open, setOpen]);
 
   const linkClasses = ({ isActive }) =>
     isActive
-      ? "flex items-center gap-3 px-4 py-2 rounded bg-[--color-accent] text-white transition-colors duration-[--duration-medium]"
-      : "flex items-center gap-3 px-4 py-2 rounded text-[--color-text] hover:bg-[--color-surface-light] transition-colors duration-[--duration-medium]";
+      ? "flex items-center gap-3 px-4 py-2 rounded-base bg-accent text-white transition-colors duration-(--duration-medium)"
+      : "flex items-center gap-3 px-4 py-2 rounded-base text-text hover:bg-surface-light transition-colors duration-(--duration-medium)";
 
   return (
     <>
-      {/* Hamburger Icon with animation */}
+      {/* Hamburger (mobile only — desktop uses the top nav) */}
       {!open && (
         <button
           onClick={() => setOpen(true)}
-          className="fixed top-4 left-4 z-50 text-white bg-[--color-accent] p-2 rounded hover:bg-[--color-accent-hover] transition-all duration-[--duration-medium] hover:scale-105"
-          aria-label="Open sidebar menu"
+          className="md:hidden fixed top-4 left-4 z-50 text-white bg-accent p-2 rounded-base hover:bg-accent-hover transition-all duration-(--duration-medium) hover:scale-105"
+          aria-label="Open menu"
         >
-          <Menu size={28} className="transition-transform duration-[--duration-spin]" />
+          <Menu size={28} />
         </button>
       )}
 
+      {/* Backdrop */}
+      <div
+        onClick={() => setOpen(false)}
+        aria-hidden="true"
+        className={`fixed inset-0 z-40 bg-black/40 transition-opacity duration-(--duration-medium) ${
+          open ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      />
+
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full w-64 bg-[--color-surface-light] text-[--color-text] z-50 p-6 shadow-[--shadow-soft] border-r border-[--color-muted]/10 transform transition-transform duration-[--duration-medium] ease-[--ease-snappy] ${open ? "translate-x-0" : "-translate-x-full"
-          }`}
+        className={`fixed top-0 left-0 h-full w-64 bg-surface-light text-text z-50 p-6 shadow-soft border-r border-muted/10 transform transition-transform duration-(--duration-medium) ease-snappy ${
+          open ? "translate-x-0" : "-translate-x-full"
+        }`}
         aria-label="Sidebar navigation"
       >
-        {/* Close Button with animation */}
+        {/* Close button */}
         <div className="flex justify-end mb-8">
           <button
+            ref={closeBtnRef}
             onClick={() => setOpen(false)}
-            className="text-[--color-text] hover:text-[--color-accent] transition-all duration-[--duration-medium] hover:rotate-90 bg-transparent p-1"
-            aria-label="Close sidebar menu"
+            className="text-text hover:text-accent transition-all duration-(--duration-medium) hover:rotate-90 bg-transparent p-1"
+            aria-label="Close menu"
           >
             <X size={24} />
           </button>
         </div>
 
-        {/* Navigation Links */}
-        <nav className="flex flex-col gap-4" aria-label="Main menu">
-          {navItems.map((item, index) => (
+        {/* Navigation links */}
+        <nav className="flex flex-col gap-2" aria-label="Main menu">
+          {navItems.map((item) => (
             <NavLink
-              key={index}
+              key={item.path}
               to={item.path}
+              end={item.path === "/"}
               className={linkClasses}
               onClick={() => setOpen(false)}
             >
@@ -66,7 +82,7 @@ const SidebarMenu = ({ toggleDarkMode, isDarkMode, open, setOpen }) => {
         <div className="mt-6">
           <button
             onClick={toggleDarkMode}
-            className="w-full py-2 px-4 bg-[--color-accent] text-white rounded-[--radius-base] hover:bg-[--color-accent-hover] transition duration-[--duration-medium] ease-[--ease-snappy] hover:scale-105"
+            className="w-full py-2 px-4 bg-accent text-white rounded-base hover:bg-accent-hover transition duration-(--duration-medium) ease-snappy hover:scale-105"
             aria-label="Toggle dark mode"
           >
             {isDarkMode ? "Light Mode" : "Dark Mode"}
