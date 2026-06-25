@@ -1,4 +1,6 @@
 import { Mail, Globe, MessageSquare } from "lucide-react";
+import FadeIn from "../components/motion/FadeIn";
+import { card } from "../lib/ui";
 
 const Contact = () => {
   const rows = [
@@ -23,14 +25,14 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12">
-      <div className="w-full max-w-3xl bg-surface-card rounded-base shadow-soft p-8 sm:p-12">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-2 text-center">Get in Touch</h1>
-        <p className="text-muted text-center mb-10">
-          Feel free to reach out — I'm happy to connect.
+    <div className="py-12 sm:py-16">
+      <FadeIn className={`mx-auto w-full max-w-3xl ${card} p-8 sm:p-12`}>
+        <h1 className="mb-2 text-center text-3xl font-bold sm:text-4xl">Get in Touch</h1>
+        <p className="mb-10 text-center text-muted">
+          Feel free to reach out — I&apos;m happy to connect.
         </p>
 
-        <div className="divide-y divide-muted/15">
+        <div className="divide-y divide-border">
           {rows.map(({ icon: Icon, label, value, href, external }) => (
             <div
               key={label}
@@ -56,7 +58,7 @@ const Contact = () => {
             </div>
           ))}
         </div>
-      </div>
+      </FadeIn>
     </div>
   );
 };
