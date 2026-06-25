@@ -1,85 +1,101 @@
-function About() {
+import FadeIn from "../components/motion/FadeIn";
+import { card } from "../lib/ui";
+
+const expertise = [
+  {
+    area: "Artificial Intelligence",
+    items: [
+      "Machine Learning model development",
+      "Natural Language Processing",
+      "Computer Vision systems",
+      "Reinforcement Learning",
+    ],
+  },
+  {
+    area: "Systems Engineering",
+    items: [
+      "Cloud infrastructure architecture",
+      "Containerization & orchestration",
+      "Microservices implementation",
+      "Performance optimization",
+    ],
+  },
+  {
+    area: "Data Engineering",
+    items: [
+      "Big data processing frameworks",
+      "ETL pipeline development",
+      "Database system design",
+      "Real-time analytics systems",
+    ],
+  },
+  {
+    area: "Software Development",
+    items: [
+      "Full-stack web development",
+      "API design & integration",
+      "Test-driven development",
+      "CI/CD implementation",
+    ],
+  },
+];
+
+export default function About() {
   return (
-    <div className="space-y-12">
-      {/* Hero section */}
-      <section className="bg-surface-accent rounded-xl p-8 shadow-medium">
-        <h1 className="text-4xl font-bold mb-4">About Me</h1>
-        <p className="text-xl opacity-80 max-w-3xl">
-          Computer Science graduate with expertise in Data Science and Software Engineering
+    <div className="mx-auto max-w-4xl py-12 sm:py-16">
+      {/* Hero */}
+      <FadeIn className={`${card} bg-surface-accent p-8 sm:p-10`}>
+        <h1 className="text-4xl font-bold sm:text-5xl">About Me</h1>
+        <p className="mt-4 max-w-2xl text-lg text-muted">
+          Computer Science graduate with a focus on data science and software
+          engineering.
         </p>
-      </section>
+      </FadeIn>
 
-      {/* Bio section */}
-      <section className="bg-surface-card rounded-xl p-8 shadow-soft">
-        <h2 className="text-2xl font-semibold mb-6 text-accent">Professional Background</h2>
-        <div className="space-y-6">
+      {/* Bio */}
+      <FadeIn className={`${card} mt-8 p-8`}>
+        <h2 className="text-2xl font-semibold text-accent">Background</h2>
+        <div className="mt-5 space-y-4 leading-relaxed text-muted">
           <p>
-            I am a Computer Science grad with a BS degree. I specialized in data science and software engineering.
-            I have great interest in artificial intelligence, systems architecture, and big data.
-            My technical foundation combines the theoretical principles and the practical implementations of computer science.
+            I&apos;m a Computer Science grad (B.S.) specialized in data science
+            and software engineering, with a strong interest in artificial
+            intelligence, systems architecture, and big data. My foundation
+            combines the theory of computer science with the practice of actually
+            shipping it.
           </p>
           <p>
-            I have a systems-oriented mindset when it comes to software.
-            I consider how components interact across the technology stack, design for robustness, maintainability, and performance.
-            Whether building microservices architectures or fine-tuning, I prioritize creating solutions that elegantly solve complex technical challenges.
+            I take a systems-oriented view of software: how components interact
+            across the stack, and how to design for robustness, maintainability,
+            and performance. I care about solutions that are correct, tested, and
+            explainable — not just demos.
           </p>
           <p>
-            In my personal life I enjoy playing video games with my friends, exercising, calisthenics,
-            working on side projects.
-          </p>
-          <p>
-            Some of the games I enjoy are the Civilization series, Northgard, Marvel Rivals, and Ark: Survival Evolved.
+            Outside of work I enjoy gaming with friends, calisthenics, and side
+            projects. A few favorites: the Civilization series, Northgard, Marvel
+            Rivals, and Ark: Survival Evolved.
           </p>
         </div>
-      </section>
+      </FadeIn>
 
-      {/* Technical Skills */}
-      <section className="bg-surface-card rounded-xl p-8 shadow-soft">
-        <h2 className="text-2xl font-semibold mb-6 text-accent">Technical Expertise</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <h3 className="text-xl font-medium">Artificial Intelligence</h3>
-            <ul className="list-disc pl-5 space-y-1 opacity-80">
-              <li>Machine Learning Model Development</li>
-              <li>Natural Language Processing</li>
-              <li>Computer Vision Systems</li>
-              <li>Reinforcement Learning</li>
-            </ul>
-          </div>
-          <div className="space-y-2">
-            <h3 className="text-xl font-medium">Systems Engineering</h3>
-            <ul className="list-disc pl-5 space-y-1 opacity-80">
-              <li>Cloud Infrastructure Architecture</li>
-              <li>Containerization & Orchestration</li>
-              <li>Microservices Implementation</li>
-              <li>Performance Optimization</li>
-            </ul>
-          </div>
-          <div className="space-y-2">
-            <h3 className="text-xl font-medium">Data Engineering</h3>
-            <ul className="list-disc pl-5 space-y-1 opacity-80">
-              <li>Big Data Processing Frameworks</li>
-              <li>ETL Pipeline Development</li>
-              <li>Database System Design</li>
-              <li>Data Warehousing Solutions</li>
-              <li>Real-time Analytics Systems</li>
-            </ul>
-          </div>
-          <div className="space-y-2">
-            <h3 className="text-xl font-medium">Software Development</h3>
-            <ul className="list-disc pl-5 space-y-1 opacity-80">
-              <li>Full-Stack Web Development</li>
-              <li>API Design & Integration</li>
-              <li>Version Control Systems</li>
-              <li>Test-Driven Development</li>
-              <li>CI/CD Implementation</li>
-            </ul>
-          </div>
+      {/* Technical expertise */}
+      <FadeIn className={`${card} mt-8 p-8`}>
+        <h2 className="text-2xl font-semibold text-accent">Technical Expertise</h2>
+        <div className="mt-6 grid gap-6 sm:grid-cols-2">
+          {expertise.map(({ area, items }) => (
+            <div key={area}>
+              <h3 className="text-lg font-medium">{area}</h3>
+              <ul className="mt-2 space-y-1.5">
+                {items.map((item) => (
+                  <li key={item} className="flex gap-2 text-sm text-muted">
+                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-      </section>
-
+      </FadeIn>
     </div>
   );
 }
-
-export default About;
