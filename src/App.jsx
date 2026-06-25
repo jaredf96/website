@@ -1,24 +1,36 @@
 import { Suspense, lazy, useState, useEffect } from "react";
-import { Routes, Route, Link, NavLink, useLocation } from "react-router-dom";
+import { Routes, Route, Link, NavLink, Navigate, useLocation } from "react-router-dom";
 import SidebarMenu from "./components/SidebarMenu";
 import NotFound from "./pages/NotFound";
 import { navItems } from "./navItems";
 
 // Lazy load pages
 const Home = lazy(() => import("./pages/Home"));
-const Projects = lazy(() => import("./pages/Projects"));
+const Work = lazy(() => import("./pages/Work"));
+const CaseStudy = lazy(() => import("./pages/CaseStudy"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Resume = lazy(() => import("./pages/Resume"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 
-// Scroll restoration component
-function ScrollToTop() {
-  const { pathname } = useLocation();
+// Scroll to top on route change, or to the hash target for deep links.
+function ScrollManager() {
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
+    if (hash) {
+      const id = hash.slice(1);
+      const scrollToHash = () => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView();
+      };
+      // Try now and again after lazy content mounts.
+      scrollToHash();
+      const t = setTimeout(scrollToHash, 150);
+      return () => clearTimeout(t);
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, hash]);
 
   return null;
 }
@@ -50,7 +62,7 @@ function App() {
 
   return (
     <div className="relative min-h-screen bg-surface text-text transition-colors duration-(--duration-medium)">
-      <ScrollToTop />
+      <ScrollManager />
 
       {/* Slide-over sidebar + backdrop (mobile primary, available everywhere) */}
       <SidebarMenu
@@ -96,7 +108,10 @@ function App() {
           >
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/projects" element={<Projects />} />
+              <Route path="/work" element={<Work />} />
+              <Route path="/work/:slug" element={<CaseStudy />} />
+              {/* Redirect the old route so existing links keep working */}
+              <Route path="/projects" element={<Navigate to="/work" replace />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/resume" element={<Resume />} />
