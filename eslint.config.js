@@ -29,6 +29,9 @@ export default [
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
       'react/jsx-no-target-blank': 'off',
+      // Personal portfolio (no TS / no prop-types) — keep JSX copy readable.
+      'react/prop-types': 'off',
+      'react/no-unescaped-entities': 'off',
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
