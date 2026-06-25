@@ -91,6 +91,18 @@
     cursor: pointer;
   }
 
+  /* Consistent, visible keyboard focus ring */
+  a:focus-visible,
+  button:focus-visible,
+  [tabindex]:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
   pre {
     font-family: var(--font-mono);
     padding: 1rem;
@@ -121,35 +133,15 @@ pre::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent-hover);
 }
 
-/* Scroll-reveal animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn var(--duration-fade) var(--ease-snappy) forwards;
-}
-
-.section-animate {
-  transition: opacity var(--duration-fade) var(--ease-snappy),
-    transform var(--duration-fade) var(--ease-snappy);
-}
-
-/* Respect users who prefer reduced motion */
+/* Respect users who prefer reduced motion — neutralize animations and
+   transitions globally (Motion primitives also honor this via JS). */
 @media (prefers-reduced-motion: reduce) {
-  .section-animate {
-    opacity: 1 !important;
-  }
-
-  .animate-fadeIn {
-    animation: none;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

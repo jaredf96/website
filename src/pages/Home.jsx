@@ -4,11 +4,7 @@ import { featuredProjects } from "../data/projects";
 import ProjectCard from "../components/work/ProjectCard";
 import FadeIn from "../components/motion/FadeIn";
 import { StaggerContainer, StaggerItem } from "../components/motion/Stagger";
-
-const btnPrimary =
-  "inline-flex items-center gap-2 rounded-base bg-accent px-5 py-2.5 text-sm font-medium text-white transition-colors duration-(--duration-medium) hover:bg-accent-hover";
-const btnOutline =
-  "inline-flex items-center gap-2 rounded-base border border-border px-5 py-2.5 text-sm font-medium text-text transition-colors duration-(--duration-medium) hover:border-accent hover:text-accent";
+import { btnPrimary, btnOutline } from "../lib/ui";
 
 export default function Home() {
   return (
