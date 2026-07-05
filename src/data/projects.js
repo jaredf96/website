@@ -228,6 +228,147 @@ export const projects = [
     },
   },
 
+  {
+    slug: "caltracker",
+    name: "CalTracker",
+    tagline: "Accuracy-first calorie & macro logging",
+    group: "featured",
+    year: "2026",
+    status: "private",
+    repo: null,
+    repoNote: "Private repository. Case study available.",
+    summary:
+      "A personal calorie and macro tracker built for speed of daily entry, where accuracy comes from weighing grams — every food stores per-100g macros and every total is derived, never trusted from a label.",
+    context:
+      "Most food trackers optimize for database size and accept whatever numbers the database claims. CalTracker inverts that: a kitchen scale is the source of truth, imported data is quarantined until reviewed, and logging a meal takes seconds.",
+    role: "Solo — product, data model, full-stack build.",
+    tech: ["SvelteKit", "Svelte 5", "TypeScript", "Supabase", "Tailwind CSS", "ZXing", "Vitest"],
+    highlights: [
+      "Per-100g data model: totals always derived as grams ÷ 100 × per-100g",
+      "Four capture paths: barcode camera scan, label entry, USDA search, manual",
+      "Imported/scanned data flagged 'needs review' until confirmed",
+      "Postgres with row-level security via Supabase Auth (SSR)",
+      "Six unit-test suites: nutrition math, USDA + Open Food Facts clients, auth guard, DB layer",
+    ],
+    metrics: [],
+    actions: [
+      { kind: "case-study", label: "View Case Study", to: "/work/caltracker" },
+      { kind: "architecture", label: "Data Model", to: "/work/caltracker#model" },
+      { kind: "demo", label: "Capture Flow", to: "/work/caltracker#capture" },
+    ],
+    caseStudy: {
+      sections: [
+        {
+          id: "overview",
+          title: "Overview",
+          body: [
+            "CalTracker is a single-user calorie and macro logger built around one conviction: the kitchen scale is the only number you should trust. Label and database values are starting points, not truth.",
+            "The product goal is speed — logging a weighed meal should take seconds — without ever compromising the integrity of the daily totals.",
+          ],
+        },
+        {
+          id: "model",
+          title: "Accuracy-First Data Model",
+          body: [
+            "Every food stores macros per 100g, and every logged total is derived at read time as amount ÷ 100 × per-100g. Nothing user-facing is ever a stored, editable total — so a corrected food definition retroactively fixes every meal that used it.",
+          ],
+          bullets: [
+            "Per-100g as the single canonical representation for all foods",
+            "Derived totals — no denormalized numbers to drift out of sync",
+            "Imported and scanned foods are flagged 'needs review' until explicitly confirmed",
+            "Postgres with row-level security; auth via Supabase SSR helpers",
+          ],
+        },
+        {
+          id: "capture",
+          title: "Fast Capture",
+          body: [
+            "Daily use lives or dies on entry friction, so there are four ways in: scan a barcode with the camera (ZXing), transcribe a nutrition label, search USDA FoodData Central, or enter manually. All four converge on the same review step before anything is trusted.",
+          ],
+          media: { kind: "image", label: "Capture flow — coming soon" },
+        },
+        {
+          id: "testing",
+          title: "Testing & Tradeoffs",
+          body: [
+            "The parts that can silently lie are the parts under test: the nutrition math, the USDA and Open Food Facts API clients, the auth guard, and the database layer — six Vitest suites in strict TypeScript.",
+            "Notable tradeoffs: deriving totals costs reads but eliminates a whole class of stale-data bugs; quarantining imports adds a tap but keeps garbage out of the log; and database errors are propagated to the UI rather than rendering empty states that look like truth.",
+          ],
+        },
+      ],
+    },
+  },
+
+  {
+    slug: "gym-tracker",
+    name: "Personal Gym Tracker",
+    tagline: "Local-first PWA with a deterministic progression engine",
+    group: "featured",
+    year: "2026",
+    status: "private",
+    repo: null,
+    repoNote: "Private repository. Case study available.",
+    summary:
+      "A local-first, offline-capable PWA for fast workout logging — with a deterministic, rule-based progressive-overload engine that explains every suggestion, and optional cloud sync when you want it.",
+    context:
+      "A 'Notes-app upgrade' for the gym: log sets in seconds, see last session at a glance, and get progression suggestions you can actually audit — computed by rules, not vibes. Data lives on-device and the app works fully offline; Supabase sync is strictly opt-in.",
+    role: "Solo — product, engine design, frontend, sync.",
+    tech: ["React", "TypeScript", "Dexie (IndexedDB)", "PWA", "Supabase", "Vitest"],
+    highlights: [
+      "Deterministic progression engine — nine rule modules covering progression, deloads, rotation, volume, and readiness flags",
+      "Local-first: IndexedDB via Dexie, fully offline, installable as a PWA",
+      "Optional Supabase sync with row-level security — zero config runs local-only",
+      "Last-session comparison, exercise swaps, session editing, and plate math",
+      "Engine behaviors covered by a Vitest suite; delivered in hardening phases (data safety → engine truthfulness → UX)",
+    ],
+    metrics: [],
+    actions: [
+      { kind: "case-study", label: "View Case Study", to: "/work/gym-tracker" },
+      { kind: "scoring", label: "Progression Engine", to: "/work/gym-tracker#engine" },
+      { kind: "architecture", label: "Local-First Sync", to: "/work/gym-tracker#sync" },
+    ],
+    caseStudy: {
+      sections: [
+        {
+          id: "overview",
+          title: "Overview",
+          body: [
+            "A mobile-first PWA for tracking gym progress, seeded from the 4-day upper/lower split I actually run. The design bar was simple: logging a set must be faster than the rest timer, and every progression suggestion must be explainable.",
+          ],
+        },
+        {
+          id: "engine",
+          title: "Deterministic Progression Engine",
+          body: [
+            "Progressive overload is handled by a rule-based engine, deliberately not an ML model: given your history, it produces the same suggestion every time, and each rule can be read, tested, and argued with.",
+            "The engine is decomposed into nine focused modules — progression, deload, rotation, schedule, volume, comparison, readiness flags, analysis, and stats — each independently unit-tested with Vitest.",
+          ],
+        },
+        {
+          id: "sync",
+          title: "Local-First Architecture & Optional Sync",
+          body: [
+            "All data lives on-device in IndexedDB (via Dexie), so the app is fully functional offline and installs to the home screen as a PWA. Cloud sync is strictly additive: with no environment variables set, there is no login and no network dependency; with Supabase configured, you get accounts and per-user row-level-secured persistence.",
+          ],
+          bullets: [
+            "IndexedDB via Dexie with live React queries (dexie-react-hooks)",
+            "First launch seeds the exercise library and program from a spreadsheet template",
+            "Sync is opt-in by configuration — local-only remains the default path",
+            "Row-level security scopes every synced row to its owner",
+          ],
+        },
+        {
+          id: "tradeoffs",
+          title: "Tradeoffs & Discipline",
+          body: [
+            "Deterministic rules over ML: less flashy, but auditable, testable, and trustworthy at 6am with a barbell loaded. Local-first over cloud-first: sync complexity is real, but the app never blocks on a network it doesn't need.",
+            "The build was delivered in explicit hardening phases — data-safety for sync/seeding/backup first, then engine truthfulness fixes, then UX polish — with the engine's behavior locked down by tests before the interface got attention.",
+          ],
+        },
+      ],
+    },
+  },
+
   // ───────────────────────── Smaller Builds ─────────────────────────
   {
     slug: "discord-game-alert-bot",
