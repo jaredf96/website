@@ -214,7 +214,7 @@ export const projects = [
           title: "Dashboard Design",
           body: [
             "The dashboard prioritizes clarity: an unambiguous overall verdict, with out-of-tolerance measurements flagged in red.",
-            "Two views make the geometry legible at a glance — a polar plot of radiation-field deviation by gantry angle against the 1 mm tolerance ring, and a field-centre offset scatter relative to the ball-bearing phantom.",
+            "Two views make the geometry legible at a glance — a polar plot of radiation-field deviation by gantry angle against the 1 mm tolerance ring, and a field-centre offset scatter relative to the ball-bearing phantom. Measurements come in by CSV upload or manual entry, with a realistic demo dataset built in.",
           ],
           media: [
             {
@@ -233,7 +233,7 @@ export const projects = [
           id: "notes",
           title: "Technical Notes",
           body: [
-            "Each run exports a self-contained HTML report: results against the AAPM TG-142 1 mm tolerance, per-measurement pass/fail across gantry, collimator, and couch rotations, and the mean systematic shift. The example below shows the tool doing its job — catching a genuinely out-of-tolerance setup.",
+            "Each run exports a self-contained HTML report: results against the AAPM TG-142 1 mm tolerance, per-measurement pass/fail across gantry, collimator, and couch rotations, and the mean systematic shift. The example below runs on the built-in demo dataset — a realistic session with two couch rotations out of tolerance — and shows the tool doing its job: flagging the failure.",
             "Building this meant learning the clinical QA workflow from the ground up to represent it honestly — the data pipeline and visualization choices all follow from how a physicist actually reads these numbers.",
           ],
           media: {
