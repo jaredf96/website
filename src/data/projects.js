@@ -43,7 +43,6 @@ export const projects = [
     actions: [
       { kind: "case-study", label: "View Case Study", to: "/work/shut-it-down" },
       { kind: "architecture", label: "Architecture", to: "/work/shut-it-down#architecture" },
-      { kind: "demo", label: "Demo Walkthrough", to: "/work/shut-it-down#demo" },
     ],
     caseStudy: {
       sections: [
@@ -88,14 +87,6 @@ export const projects = [
             "Key decisions and why: DynamoDB over a relational store for simple, fast per-account lookups; precomputed cost estimates over live pricing calls on every render; reversible cleanup flows over immediate deletion.",
           ],
         },
-        {
-          id: "demo",
-          title: "Demo Walkthrough",
-          body: [
-            "A walkthrough of a scan: discovering resources, reading the cost and risk ranking, and stepping through a guided cleanup.",
-          ],
-          media: { kind: "video", label: "Demo walkthrough — coming soon" },
-        },
       ],
     },
   },
@@ -127,7 +118,6 @@ export const projects = [
     actions: [
       { kind: "case-study", label: "View Case Study", to: "/work/resume-jd-matcher" },
       { kind: "scoring", label: "Scoring Logic", to: "/work/resume-jd-matcher#scoring" },
-      { kind: "demo", label: "Demo Output", to: "/work/resume-jd-matcher#demo" },
     ],
     caseStudy: {
       sections: [
@@ -158,14 +148,6 @@ export const projects = [
             "The job description is parsed into structured requirements — must-haves, nice-to-haves, and seniority signals — so scoring compares like for like.",
           ],
         },
-        {
-          id: "demo",
-          title: "Demo Output",
-          body: [
-            "Example output showing a scored resume with per-skill explanations and tailoring suggestions.",
-          ],
-          media: { kind: "image", label: "Sample scored output — coming soon" },
-        },
       ],
     },
   },
@@ -194,7 +176,6 @@ export const projects = [
     metrics: [],
     actions: [
       { kind: "case-study", label: "View Case Study", to: "/work/winston-lutz-qa" },
-      { kind: "dashboard", label: "Dashboard Preview", to: "/work/winston-lutz-qa#dashboard" },
       { kind: "notes", label: "Technical Notes", to: "/work/winston-lutz-qa#notes" },
     ],
     caseStudy: {
@@ -208,11 +189,10 @@ export const projects = [
         },
         {
           id: "dashboard",
-          title: "Dashboard Preview",
+          title: "Dashboard Design",
           body: [
             "The dashboard prioritizes clarity: tolerance bands, trend lines over time, and an unambiguous pass/fail read.",
           ],
-          media: { kind: "image", label: "Dashboard preview — coming soon" },
         },
         {
           id: "notes",
@@ -251,7 +231,6 @@ export const projects = [
     actions: [
       { kind: "case-study", label: "View Case Study", to: "/work/caltracker" },
       { kind: "architecture", label: "Data Model", to: "/work/caltracker#model" },
-      { kind: "demo", label: "Capture Flow", to: "/work/caltracker#capture" },
     ],
     caseStudy: {
       sections: [
@@ -282,7 +261,6 @@ export const projects = [
           body: [
             "Daily use lives or dies on entry friction, so there are four ways in: scan a barcode with the camera (ZXing), transcribe a nutrition label, search USDA FoodData Central, or enter manually. All four converge on the same review step before anything is trusted.",
           ],
-          media: { kind: "image", label: "Capture flow — coming soon" },
         },
         {
           id: "testing",
@@ -302,9 +280,9 @@ export const projects = [
     tagline: "Local-first PWA with a deterministic progression engine",
     group: "featured",
     year: "2026",
-    status: "private",
-    repo: null,
-    repoNote: "Private repository. Case study available.",
+    status: "public",
+    repo: { href: "https://github.com/jaredf96/personal-gym-tracker", label: "View on GitHub" },
+    repoNote: null,
     summary:
       "A local-first, offline-capable PWA for fast workout logging — with a deterministic, rule-based progressive-overload engine that explains every suggestion, and optional cloud sync when you want it.",
     context:
@@ -391,7 +369,6 @@ export const projects = [
     metrics: [],
     actions: [
       { kind: "summary", label: "View Summary", to: "/work/discord-game-alert-bot" },
-      { kind: "demo", label: "Bot Demo", to: "/work/discord-game-alert-bot#demo" },
     ],
     caseStudy: {
       sections: [
@@ -401,14 +378,6 @@ export const projects = [
           body: [
             "A Discord bot that delivers game alerts on a schedule or in response to events, with configuration and deployment handled cleanly enough to leave running.",
           ],
-        },
-        {
-          id: "demo",
-          title: "Bot Demo",
-          body: [
-            "Example alerts and the configuration behind them.",
-          ],
-          media: { kind: "image", label: "Bot in action — coming soon" },
         },
       ],
     },
@@ -480,7 +449,11 @@ export const projects = [
             "Engine failure en route and on takeoff, including cargo flights",
             "Runway & landing incidents (landing short, striking ground)",
           ],
-          media: { kind: "image", label: "Cluster projection (TF-IDF + K-Means) — coming soon" },
+          media: {
+            kind: "image",
+            src: "/images/plane-crash-clusters.png",
+            label: "Crash-summary clusters — TF-IDF + K-Means, SVD projection",
+          },
         },
         {
           id: "findings",

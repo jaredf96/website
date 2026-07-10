@@ -4,20 +4,20 @@ import { btnPrimary, btnOutline, card } from "../lib/ui";
 
 const skillGroups = [
   {
-    title: "Programming Languages",
-    skills: ["Python", "Java", "JavaScript", "SQL", "C / C# / C++", "Assembly", "HTML", "Swift"],
+    title: "Languages",
+    skills: ["Python", "TypeScript", "JavaScript", "SQL", "Java", "C/C++"],
   },
   {
     title: "Frameworks & Libraries",
-    skills: ["React", "Pandas", "Scikit-Learn", "NumPy", "Matplotlib", "Seaborn", "NLTK", "Tailwind"],
+    skills: ["React", "SvelteKit / Svelte 5", "FastAPI", "Tailwind CSS", "pandas", "scikit-learn"],
   },
   {
-    title: "Tools & Technologies",
-    skills: ["AWS", "MySQL", "Xcode", "Git", "Jupyter Notebook", "Docker", "VS Code"],
+    title: "Cloud & Tools",
+    skills: ["AWS (DynamoDB, Boto3)", "Docker", "Supabase", "PostgreSQL", "Git", "Vercel", "Jupyter"],
   },
   {
-    title: "Areas of Expertise",
-    skills: ["Data Analysis", "Machine Learning", "NLP", "Data Visualization", "Web Development", "Database Design"],
+    title: "Practices",
+    skills: ["Unit testing (Vitest, Pytest)", "Local-first / PWA", "Row-level security", "NLP & clustering", "Data visualization"],
   },
 ];
 
