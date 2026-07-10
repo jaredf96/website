@@ -43,6 +43,7 @@ export const projects = [
     actions: [
       { kind: "case-study", label: "View Case Study", to: "/work/shut-it-down" },
       { kind: "architecture", label: "Architecture", to: "/work/shut-it-down#architecture" },
+      { kind: "demo", label: "See It Run", to: "/work/shut-it-down#demo" },
     ],
     caseStudy: {
       sections: [
@@ -85,6 +86,26 @@ export const projects = [
           title: "Technical Tradeoffs",
           body: [
             "Key decisions and why: DynamoDB over a relational store for simple, fast per-account lookups; precomputed cost estimates over live pricing calls on every render; reversible cleanup flows over immediate deletion.",
+          ],
+        },
+        {
+          id: "demo",
+          title: "In Action",
+          body: [
+            "Run against my own AWS account: the scan surfaced an unassociated Elastic IP quietly costing ~$3.65/month, ranked it high-risk with a plain-English explanation of why it costs money, and tracked the finding across scan history until I released it.",
+            "Cleanup is engineered to be hard to get wrong. The app is read-only by default — mutations sit behind an ENABLE_CLEANUP_ACTIONS flag — and every action supports dry-run, requires re-typing the resource ID to confirm, is checked against server-side preconditions, and lands in an attempt log (including failures like CONFIRMATION_MISMATCH and PRECONDITION_FAILED).",
+          ],
+          media: [
+            {
+              kind: "image",
+              src: "/images/shut-it-down-scan.png",
+              label: "Live scan: cost estimate, risk ranking, and suggested action for a leftover Elastic IP",
+            },
+            {
+              kind: "image",
+              src: "/images/shut-it-down-cleanup.png",
+              label: "Guided cleanup: dry-run, type-to-confirm, and the attempt audit trail",
+            },
           ],
         },
       ],
@@ -168,7 +189,7 @@ export const projects = [
     role: "Solo — data visualization, dashboard design, and domain research.",
     tech: ["Python", "Data Visualization", "Pandas", "Dashboarding"],
     highlights: [
-      "Clear visualization of alignment measurements and trends",
+      "Polar and scatter views of isocentre deviation against the AAPM TG-142 1 mm tolerance",
       "Dashboard design focused on tolerance and pass/fail clarity",
       "Technical communication of a specialized QA workflow",
       "Required learning the clinical domain from the ground up",
@@ -176,6 +197,7 @@ export const projects = [
     metrics: [],
     actions: [
       { kind: "case-study", label: "View Case Study", to: "/work/winston-lutz-qa" },
+      { kind: "dashboard", label: "Dashboard Preview", to: "/work/winston-lutz-qa#dashboard" },
       { kind: "notes", label: "Technical Notes", to: "/work/winston-lutz-qa#notes" },
     ],
     caseStudy: {
@@ -191,15 +213,34 @@ export const projects = [
           id: "dashboard",
           title: "Dashboard Design",
           body: [
-            "The dashboard prioritizes clarity: tolerance bands, trend lines over time, and an unambiguous pass/fail read.",
+            "The dashboard prioritizes clarity: an unambiguous overall verdict, with out-of-tolerance measurements flagged in red.",
+            "Two views make the geometry legible at a glance — a polar plot of radiation-field deviation by gantry angle against the 1 mm tolerance ring, and a field-centre offset scatter relative to the ball-bearing phantom.",
+          ],
+          media: [
+            {
+              kind: "image",
+              src: "/images/winston-lutz-polar.png",
+              label: "Radiation-field deviation by gantry angle vs. the 1 mm tolerance ring",
+            },
+            {
+              kind: "image",
+              src: "/images/winston-lutz-scatter.png",
+              label: "Field-centre offset relative to the ball-bearing phantom",
+            },
           ],
         },
         {
           id: "notes",
           title: "Technical Notes",
           body: [
-            "Notes on the data pipeline, the visualization choices, and what I had to learn about the clinical QA workflow to represent it honestly.",
+            "Each run exports a self-contained HTML report: results against the AAPM TG-142 1 mm tolerance, per-measurement pass/fail across gantry, collimator, and couch rotations, and the mean systematic shift. The example below shows the tool doing its job — catching a genuinely out-of-tolerance setup.",
+            "Building this meant learning the clinical QA workflow from the ground up to represent it honestly — the data pipeline and visualization choices all follow from how a physicist actually reads these numbers.",
           ],
+          media: {
+            kind: "image",
+            src: "/images/winston-lutz-report.png",
+            label: "Exported QA report — 13 measurements, two couch rotations out of tolerance, overall FAIL",
+          },
         },
       ],
     },

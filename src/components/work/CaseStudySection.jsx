@@ -23,7 +23,17 @@ export default function CaseStudySection({ section }) {
         </ul>
       )}
 
-      {section.media && <MediaPlaceholder media={section.media} />}
+      {section.media && (
+        <div
+          className={`mt-5 ${
+            Array.isArray(section.media) ? "grid gap-5 lg:grid-cols-2" : ""
+          }`}
+        >
+          {(Array.isArray(section.media) ? section.media : [section.media]).map((m) => (
+            <MediaPlaceholder key={m.label} media={m} />
+          ))}
+        </div>
+      )}
     </FadeIn>
   );
 }
