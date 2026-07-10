@@ -1,4 +1,4 @@
-import { Mail, Globe, MessageSquare } from "lucide-react";
+import { Mail, Github, Globe, MessageSquare } from "lucide-react";
 import FadeIn from "../components/motion/FadeIn";
 import { card } from "../lib/ui";
 
@@ -9,6 +9,13 @@ const Contact = () => {
       label: "Email",
       value: "jfulk44@gmail.com",
       href: "mailto:jfulk44@gmail.com",
+    },
+    {
+      icon: Github,
+      label: "GitHub",
+      value: "github.com/jaredf96",
+      href: "https://github.com/jaredf96",
+      external: true,
     },
     {
       icon: Globe,

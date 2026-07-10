@@ -11,7 +11,7 @@ const faqs = [
   {
     question: "Can I see your code?",
     answer:
-      "Most of my recent work lives in private repositories, so I lead with case studies instead. Code is available on request, and I'll link a repo wherever it's cleaned up and public.",
+      "Some of it — my GitHub is linked on the contact page, and this site's own code is public there. Most of my recent projects live in private repositories, so I lead with case studies instead; I'm happy to walk through any of that code on request.",
   },
   {
     question: "Are you open to roles or freelance work?",
