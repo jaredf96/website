@@ -39,10 +39,7 @@ export const projects = [
       "Designed for multi-account / multi-tenant scanning",
       "Tested cost and risk logic with a Pytest suite",
     ],
-    metrics: [
-      { label: "Resource types scanned", value: "12+" },
-      { label: "Avg. scan latency", value: "< 5s" },
-    ],
+    metrics: [],
     actions: [
       { kind: "case-study", label: "View Case Study", to: "/work/shut-it-down" },
       { kind: "architecture", label: "Architecture", to: "/work/shut-it-down#architecture" },
@@ -435,7 +432,7 @@ export const projects = [
     highlights: [
       "Cleaned a messy historical dataset (year/country parsing, safe survivor derivation)",
       "TF-IDF + K-Means clustering over thousands of crash summaries",
-      "Five interpretable failure-mode themes (engine, weather, terrain, takeoff, approach)",
+      "Five interpretable failure-mode themes (engine, weather, landing, takeoff, hostile action)",
       "Reframed 'cause prediction' as honest nearest-theme assignment",
     ],
     metrics: [],
@@ -477,11 +474,11 @@ export const projects = [
             "TF-IDF over the crash summaries feeds a K-Means model (k=5); a 2-D projection makes the clusters legible. The five clusters are interpretable and stable:",
           ],
           bullets: [
-            "Engine / mechanical failure (often around takeoff)",
-            "Approach & landing (runway, altitude, control)",
-            "Weather & poor visibility (fog, adverse conditions)",
-            "En-route loss over terrain (mountains, ocean, disappearance)",
-            "Cargo / short-flight takeoff incidents",
+            "Hostile action & midair events (shootdowns, missiles, collisions)",
+            "Loss of control shortly after takeoff, often ending at sea",
+            "Weather & poor visibility on approach (fog, VFR into terrain)",
+            "Engine failure en route and on takeoff, including cargo flights",
+            "Runway & landing incidents (landing short, striking ground)",
           ],
           media: { kind: "image", label: "Cluster projection (TF-IDF + K-Means) — coming soon" },
         },
@@ -492,7 +489,7 @@ export const projects = [
             "The themes line up with well-known aviation risk categories, which is a good sanity check that the unsupervised method found something real.",
           ],
           bullets: [
-            "Weather and terrain dominate en-route losses; mechanical issues cluster around takeoff",
+            "Weather-on-approach, engine failure, and landing incidents separate cleanly — and hostile action (shootdowns, midair collisions) emerges as its own theme",
             "Limitations: k was chosen heuristically; summaries are post-hoc human text (reporting bias); the result is descriptive, not causal",
             "Next steps: silhouette/elbow to justify k, topic modeling (NMF/LDA), and tracking how the theme mix shifts by decade",
           ],
@@ -508,9 +505,8 @@ export const projects = [
     group: "smaller",
     year: "2025",
     status: "public",
-    // Repo intentionally omitted until it's cleaned up — see direction.
-    repo: null,
-    repoNote: "Code available upon request.",
+    repo: { href: "https://github.com/jaredf96/website", label: "View on GitHub" },
+    repoNote: null,
     summary:
       "This site — a frontend case study in React, Tailwind, responsive design, theming, accessibility, and restrained, intentional animation.",
     context:
