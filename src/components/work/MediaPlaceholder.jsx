@@ -1,12 +1,21 @@
 import { PlayCircle, Image as ImageIcon } from "lucide-react";
 
 /**
- * Framed placeholder for case-study demo media. Swap for a real <video>/<img>
- * (or embed) once assets exist — keep the same outer sizing.
+ * Case-study media. With `media.src` renders the real image; without it,
+ * renders a framed "coming soon" placeholder.
  *
- * media: { kind: "video" | "image", label }
+ * media: { kind: "video" | "image", label, src? }
  */
 export default function MediaPlaceholder({ media }) {
+  if (media.src) {
+    return (
+      <img
+        src={media.src}
+        alt={media.label}
+        className="mt-5 w-full rounded-xl border border-border bg-white"
+      />
+    );
+  }
   const Icon = media.kind === "video" ? PlayCircle : ImageIcon;
   return (
     <div className="mt-5 grid aspect-video w-full place-items-center rounded-xl border border-dashed border-border bg-surface-accent">

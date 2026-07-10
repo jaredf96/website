@@ -1,41 +1,42 @@
 import FadeIn from "../components/motion/FadeIn";
 import { card } from "../lib/ui";
 
-const expertise = [
+// Each item here is demonstrated by a project on the Work page — no aspirational claims.
+const toolkit = [
   {
-    area: "Artificial Intelligence",
+    area: "Cloud & Backend",
     items: [
-      "Machine Learning model development",
-      "Natural Language Processing",
-      "Computer Vision systems",
-      "Reinforcement Learning",
+      "AWS (DynamoDB, Boto3, cost & pricing APIs)",
+      "FastAPI service design",
+      "Docker containerization",
+      "Supabase / PostgreSQL with row-level security",
     ],
   },
   {
-    area: "Systems Engineering",
+    area: "Full-Stack Web",
     items: [
-      "Cloud infrastructure architecture",
-      "Containerization & orchestration",
-      "Microservices implementation",
-      "Performance optimization",
+      "React and SvelteKit (Svelte 5) in TypeScript",
+      "Tailwind CSS design systems",
+      "Local-first / offline PWA architecture",
+      "Auth and per-user data isolation",
     ],
   },
   {
-    area: "Data Engineering",
+    area: "Data & Machine Learning",
     items: [
-      "Big data processing frameworks",
-      "ETL pipeline development",
-      "Database system design",
-      "Real-time analytics systems",
+      "pandas and scikit-learn pipelines",
+      "NLP: TF-IDF, clustering, skill taxonomies",
+      "Data visualization and QA dashboards",
+      "Honest evaluation — limitations stated, not hidden",
     ],
   },
   {
-    area: "Software Development",
+    area: "Engineering Practice",
     items: [
-      "Full-stack web development",
-      "API design & integration",
-      "Test-driven development",
-      "CI/CD implementation",
+      "Unit testing with Vitest and Pytest",
+      "Strict TypeScript",
+      "Git/GitHub workflow, Vercel deployment",
+      "Deterministic, explainable system design",
     ],
   },
 ];
@@ -79,9 +80,12 @@ export default function About() {
 
       {/* Technical expertise */}
       <FadeIn className={`${card} mt-8 p-8`}>
-        <h2 className="text-2xl font-semibold text-accent">Technical Expertise</h2>
+        <h2 className="text-2xl font-semibold text-accent">What I Work With</h2>
+        <p className="mt-2 text-sm text-muted">
+          Everything below is demonstrated in a project on the Work page.
+        </p>
         <div className="mt-6 grid gap-6 sm:grid-cols-2">
-          {expertise.map(({ area, items }) => (
+          {toolkit.map(({ area, items }) => (
             <div key={area}>
               <h3 className="text-lg font-medium">{area}</h3>
               <ul className="mt-2 space-y-1.5">
