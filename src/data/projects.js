@@ -513,6 +513,68 @@ export const projects = [
   },
 
   {
+    slug: "car-price-predictor",
+    name: "Used-Car Price Predictor",
+    tagline: "ML pricing model + interactive Streamlit app",
+    group: "smaller",
+    year: "2023",
+    status: "private",
+    repo: null,
+    repoNote: "Private repository. Case study available.",
+    summary:
+      "Predicts UK used-car resale prices across ~33,000 Ford and Volkswagen listings — a random-forest pipeline hitting MAE ≈ £986 (R² 0.95) on a held-out test split, wrapped in an interactive Streamlit app.",
+    context:
+      "A coursework project (UNCC 4122) rebuilt into something usable: explore the market visually, or spec out a car and get a price.",
+    role: "Solo.",
+    tech: ["Python", "pandas", "scikit-learn", "RandomForest", "Streamlit", "seaborn", "joblib"],
+    highlights: [
+      "Random-forest pipeline (scaled numerics + one-hot categoricals), regularized with min_samples_leaf",
+      "MAE ≈ £986 and R² ≈ 0.95 on a held-out 20% test split — from executed output",
+      "Identical cleaning rules shared by the training notebook and the app",
+      "Interactive Streamlit app: brand comparisons, price-filtered charts, live predictions",
+    ],
+    metrics: [],
+    actions: [
+      { kind: "summary", label: "View Summary", to: "/work/car-price-predictor" },
+      { kind: "scoring", label: "Model & Metrics", to: "/work/car-price-predictor#model" },
+      { kind: "dashboard", label: "The App", to: "/work/car-price-predictor#app" },
+    ],
+    caseStudy: {
+      sections: [
+        {
+          id: "overview",
+          title: "Overview",
+          body: [
+            "A price predictor for UK used-car listings from Ford and Volkswagen — about 33,000 cars — with an interactive app for exploring the market and pricing a specific car.",
+            "Originally a data-mining course project; since reworked with proper data cleaning, a documented model, and a usable front end.",
+          ],
+        },
+        {
+          id: "model",
+          title: "Model & Metrics",
+          body: [
+            "A scikit-learn Pipeline feeds scaled numerics (year, mileage, tax, MPG, engine size) and one-hot-encoded categoricals (model, transmission, fuel type) into a random forest regularized with min_samples_leaf=5.",
+          ],
+          bullets: [
+            "MAE ≈ £986 and R² ≈ 0.95 on a held-out 20% test split",
+            "Cleaning drops missing numerics and physically impossible rows (engine size of 0, MPG under 5) and strips stray whitespace that silently splits categories",
+            "The training notebook and the app share identical cleaning, so predictions see the same distribution the model learned from",
+            "Honest next steps: cross-validation, feature importances, and prediction intervals",
+          ],
+        },
+        {
+          id: "app",
+          title: "The App",
+          body: [
+            "A Streamlit app with two tabs: Visualizations — brand-vs-brand comparisons (cars per model, average price by year, MPG by fuel type, transmission mix), filterable by dataset and price range — and Predictions, where you spec a car and get a price.",
+            "Dataset loads and the ~12 MB model are cached per session, and the trained model ships with the repo via joblib, so the app runs without retraining.",
+          ],
+        },
+      ],
+    },
+  },
+
+  {
     slug: "portfolio-rebuild",
     name: "Portfolio Rebuild",
     tagline: "A living frontend case study",
