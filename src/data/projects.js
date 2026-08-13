@@ -518,11 +518,11 @@ export const projects = [
     tagline: "ML pricing model + interactive Streamlit app",
     group: "smaller",
     year: "2023",
-    status: "private",
-    repo: null,
-    repoNote: "Private repository. Case study available.",
+    status: "public",
+    repo: { href: "https://github.com/jaredf96/4122", label: "View on GitHub" },
+    repoNote: null,
     summary:
-      "Predicts UK used-car resale prices across ~33,000 Ford and Volkswagen listings — a random-forest pipeline hitting MAE ≈ £986 (R² 0.95) on a held-out test split, wrapped in an interactive Streamlit app.",
+      "Predicts UK used-car resale prices across ~33,000 Ford and Volkswagen listings — a random-forest pipeline hitting MAE ≈ £986 (R² 0.95) on a held-out test split, wrapped in an interactive Streamlit app you can try live.",
     context:
       "A coursework project (UNCC 4122) rebuilt into something usable: explore the market visually, or spec out a car and get a price.",
     role: "Solo.",
@@ -532,12 +532,18 @@ export const projects = [
       "MAE ≈ £986 and R² ≈ 0.95 on a held-out 20% test split — from executed output",
       "Identical cleaning rules shared by the training notebook and the app",
       "Interactive Streamlit app: brand comparisons, price-filtered charts, live predictions",
+      "Deployed and publicly accessible on Streamlit Community Cloud",
     ],
     metrics: [],
     actions: [
       { kind: "summary", label: "View Summary", to: "/work/car-price-predictor" },
+      {
+        kind: "live",
+        label: "Live Demo",
+        to: "https://jaredf96-used-car-predictor.streamlit.app",
+        external: true,
+      },
       { kind: "scoring", label: "Model & Metrics", to: "/work/car-price-predictor#model" },
-      { kind: "dashboard", label: "The App", to: "/work/car-price-predictor#app" },
     ],
     caseStudy: {
       sections: [
@@ -568,6 +574,7 @@ export const projects = [
           body: [
             "A Streamlit app with two tabs: Visualizations — brand-vs-brand comparisons (cars per model, average price by year, MPG by fuel type, transmission mix), filterable by dataset and price range — and Predictions, where you spec a car and get a price.",
             "Dataset loads and the ~12 MB model are cached per session, and the trained model ships with the repo via joblib, so the app runs without retraining.",
+            "It's deployed on Streamlit Community Cloud and open to anyone — the Live Demo link above runs the same model described here.",
           ],
         },
       ],
