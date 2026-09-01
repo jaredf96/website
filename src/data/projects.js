@@ -135,7 +135,7 @@ export const projects = [
     name: "Explainable Resume Screener",
     tagline: "Evidence-first resume-to-JD matching that shows its work",
     group: "featured",
-    year: "2026",
+    year: "2025",
     status: "public",
     repo: {
       href: "https://github.com/jaredf96/explainable-resume-screener",
