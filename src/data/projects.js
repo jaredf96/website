@@ -143,7 +143,7 @@ export const projects = [
     },
     repoNote: null,
     summary:
-      "A resume screening tool for recruiters that ranks candidates against a job description with two transparent scores and quotes its evidence — every point traceable to a component, a skill, and a line of the resume. PII is redacted before scoring, and the tool never makes the hiring decision.",
+      "A resume screening tool for recruiters that ranks candidates against a job description with two transparent scores and quotes its evidence — every point traceable to a component, a skill, and a line of the resume. PII is redacted before scoring, and the tool never makes the hiring decision. The live demo runs in the browser with a sample JD built in.",
     context:
       "Most resume screeners are black boxes that reward keyword stuffing. This one types every skill claim by the evidence behind it — a bare \"Skills: Jira\" earns nothing — reports direct fit and transferability separately, and structurally cannot see a candidate's identity while scoring.",
     role: "Solo — scoring model, evidence engine, parsers, and Streamlit dashboard.",
@@ -167,6 +167,12 @@ export const projects = [
     ],
     metrics: [],
     actions: [
+      {
+        kind: "live",
+        label: "Live Demo",
+        to: "https://resume-screener-explainable.streamlit.app",
+        external: true,
+      },
       { kind: "case-study", label: "View Case Study", to: "/work/resume-screener" },
       { kind: "scoring", label: "Scoring Model", to: "/work/resume-screener#scoring" },
       { kind: "demo", label: "See It Run", to: "/work/resume-screener#demo" },
@@ -214,6 +220,7 @@ export const projects = [
           body: [
             "Against the bundled senior-backend JD, the three fictional sample resumes separate exactly as designed: the strong candidate scores 93/100 with six of six requirements demonstrated, the partial one lands at 43/100 with AWS, CI/CD, and Docker flagged as missing, and the off-field marketer reads 0/100 direct with modest transferability — not a fake middling score.",
             "Every number is inspectable: expanding a candidate shows the evidence bucket for each requirement, the quoted snippet behind each match, and review flags a recruiter should verify by hand.",
+            "The live demo above is the same app: load the built-in sample JD, then upload the fictional resumes from the repo's data/sample_resumes/ to reproduce this exact run.",
           ],
           media: [
             {
