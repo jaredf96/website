@@ -44,7 +44,7 @@ export default function CaseStudyNav({ sections, className = "" }) {
       <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted">
         On this page
       </p>
-      <ul className="space-y-1 border-l border-border">
+      <ul className="space-y-1.5 border-l border-border">
         {sections.map((s) => {
           const isActive = active === s.id;
           return (
@@ -53,7 +53,7 @@ export default function CaseStudyNav({ sections, className = "" }) {
                 href={`#${s.id}`}
                 onClick={(e) => handleClick(e, s.id)}
                 aria-current={isActive ? "true" : undefined}
-                className={`-ml-px block border-l-2 py-1 pl-3 text-sm transition-colors duration-(--duration-medium) ${
+                className={`-ml-px block border-l-2 py-1.5 pl-4 text-sm transition-colors duration-(--duration-medium) ${
                   isActive
                     ? "border-accent font-medium text-accent"
                     : "border-transparent text-muted hover:text-text"

@@ -54,7 +54,7 @@ export default function CaseStudy() {
   const showNav = sections.length >= 3;
 
   return (
-    <article className="mx-auto max-w-5xl py-12 sm:py-16">
+    <article className="mx-auto max-w-6xl py-12 sm:py-16">
       <Link
         to="/work"
         className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-accent"
@@ -64,7 +64,7 @@ export default function CaseStudy() {
       </Link>
 
       {/* Header */}
-      <FadeIn className={`mt-6 max-w-2xl ${showNav ? "" : "mx-auto"}`}>
+      <FadeIn className={`mt-6 ${showNav ? "max-w-3xl" : "mx-auto max-w-2xl"}`}>
         <p className="text-sm font-medium text-accent">{project.tagline}</p>
         <h1 className="mt-2 text-4xl font-bold sm:text-5xl">{project.name}</h1>
         <p className="mt-4 text-lg text-muted">{project.summary}</p>
@@ -84,10 +84,14 @@ export default function CaseStudy() {
         {showNav && (
           <CaseStudyNav
             sections={sections}
-            className="hidden lg:block w-44 shrink-0 self-start sticky top-28"
+            className="hidden lg:block w-52 shrink-0 self-start sticky top-28"
           />
         )}
-        <div className={`min-w-0 max-w-2xl space-y-14 lg:flex-1 ${showNav ? "" : "mx-auto"}`}>
+        <div
+          className={`min-w-0 space-y-16 ${
+            showNav ? "max-w-3xl lg:flex-1" : "mx-auto max-w-2xl"
+          }`}
+        >
           {sections.map((section) => (
             <CaseStudySection key={section.id} section={section} />
           ))}
