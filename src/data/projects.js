@@ -131,6 +131,108 @@ export const projects = [
   },
 
   {
+    slug: "resume-screener",
+    name: "Explainable Resume Screener",
+    tagline: "Evidence-first resume-to-JD matching that shows its work",
+    group: "featured",
+    year: "2026",
+    status: "public",
+    repo: {
+      href: "https://github.com/jaredf96/explainable-resume-screener",
+      label: "View on GitHub",
+    },
+    repoNote: null,
+    summary:
+      "A resume screening tool for recruiters that ranks candidates against a job description with two transparent scores and quotes its evidence — every point traceable to a component, a skill, and a line of the resume. PII is redacted before scoring, and the tool never makes the hiring decision.",
+    context:
+      "Most resume screeners are black boxes that reward keyword stuffing. This one types every skill claim by the evidence behind it — a bare \"Skills: Jira\" earns nothing — reports direct fit and transferability separately, and structurally cannot see a candidate's identity while scoring.",
+    role: "Solo — scoring model, evidence engine, parsers, and Streamlit dashboard.",
+    tech: [
+      "Python",
+      "Streamlit",
+      "Rule-based NLP",
+      "Skill taxonomies",
+      "pandas",
+      "scikit-learn",
+      "pdfplumber",
+      "Pytest",
+    ],
+    highlights: [
+      "Two scores instead of one blended number — Direct Evidence Coverage and Technical Transferability — each with a transparent component table",
+      "A compositional evidence ladder types every skill claim: direct, adjacent, inferred, tool-only, or generic-claim — bare keyword lists earn no credit",
+      "PII isolation by construction: the matcher's input type has no PII-capable fields, and tests prove identical qualifications score identically under different names, emails, and addresses",
+      "Rule-based JD parsing splits required vs. preferred skills, experience level, education, and knockout requirements (surfaced for manual verification, never scored)",
+      "Every matched skill is backed by a snippet quoted from the redacted resume text, labeled strong/moderate/weak",
+      "117 offline tests, including a labeled regression harness with a project rule against tuning weights from single anecdotes",
+    ],
+    metrics: [],
+    actions: [
+      { kind: "case-study", label: "View Case Study", to: "/work/resume-screener" },
+      { kind: "scoring", label: "Scoring Model", to: "/work/resume-screener#scoring" },
+      { kind: "demo", label: "See It Run", to: "/work/resume-screener#demo" },
+    ],
+    caseStudy: {
+      sections: [
+        {
+          id: "overview",
+          title: "Overview",
+          body: [
+            "The screener reads a job description and a stack of resumes (PDF, DOCX, TXT) and produces a ranked dashboard: two 0–100 scores per candidate, a component table showing where every point came from, and evidence snippets quoted from the resume. It is decision support only — the tool ranks and explains; it never accepts or rejects.",
+            "It runs fully offline as a Streamlit app: rule-based JD parsing, taxonomy-based skill extraction, and typed dataclasses between every stage. The UI layer contains no business logic.",
+          ],
+        },
+        {
+          id: "scoring",
+          title: "Scoring Model",
+          body: [
+            "Every role-specific requirement is checked against the resume by a compositional evidence ladder: what action was performed, on what object, in which named system, with what outcome. Which slots co-occur determines the evidence type — direct (full credit), adjacent (partial), inferred (context only), tool-only or generic-claim (nothing). \"Skills: Jira\" earns zero; \"created user accounts in Active Directory for 300+ employees\" earns full credit.",
+            "Two scores are reported side by side rather than blended: Direct Evidence Coverage (how much of this role's requirements the resume proves with demonstrated work) and Technical Transferability (demonstrated adjacent capability plus education). A strong off-family candidate reads as \"low direct, moderate transferability\" instead of a misleading near-zero.",
+          ],
+          bullets: [
+            "Weights renormalize when a JD omits a component, and the dashboard shows both base and applied weights",
+            "A resume that proves almost nothing is capped at 30/100 Transferability — residual signals can't accumulate",
+            "Semantic similarity was deliberately removed from the score: lexical overlap rewards keyword stuffing",
+            "Knockout requirements (driver's license, work authorization) are surfaced for manual checking, never scored",
+          ],
+          media: {
+            kind: "image",
+            src: "/images/resume-screener-breakdown.png",
+            label: "Per-candidate breakdown: dual scores, evidence buckets, and the component table behind every point",
+          },
+        },
+        {
+          id: "privacy",
+          title: "PII Isolation",
+          body: [
+            "Names, emails, phone numbers, addresses, and links are redacted before scoring — and the architecture makes the alternative impossible: the matcher accepts only a ScoringInput dataclass that has no PII-capable fields, so contact details cannot influence scores by construction.",
+            "Tests enforce it: two resumes with identical qualifications but different names, emails, phones, and addresses must produce identical scores. Evidence snippets are quoted from the redacted text only.",
+          ],
+        },
+        {
+          id: "demo",
+          title: "In Action",
+          body: [
+            "Against the bundled senior-backend JD, the three fictional sample resumes separate exactly as designed: the strong candidate scores 93/100 with six of six requirements demonstrated, the partial one lands at 43/100 with AWS, CI/CD, and Docker flagged as missing, and the off-field marketer reads 0/100 direct with modest transferability — not a fake middling score.",
+            "Every number is inspectable: expanding a candidate shows the evidence bucket for each requirement, the quoted snippet behind each match, and review flags a recruiter should verify by hand.",
+          ],
+          media: [
+            {
+              kind: "image",
+              src: "/images/resume-screener-dashboard.png",
+              label: "Ranked dashboard: parsed JD, applied weights, and dual scores per candidate",
+            },
+            {
+              kind: "image",
+              src: "/images/resume-screener-evidence.png",
+              label: "Evidence view: skill classification, quoted snippets from redacted text, and review flags",
+            },
+          ],
+        },
+      ],
+    },
+  },
+
+  {
     slug: "winston-lutz-qa",
     name: "Winston-Lutz QA Dashboard",
     tagline: "QA & data visualization for linac QA",
