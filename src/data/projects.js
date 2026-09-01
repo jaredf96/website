@@ -54,7 +54,7 @@ export const projects = [
       {
         kind: "live",
         label: "Live Demo",
-        to: "https://demo.jareds.codes",
+        to: "https://dkhynvqt27enm.cloudfront.net",
         external: true,
       },
       { kind: "case-study", label: "View Case Study", to: "/work/shut-it-down" },
