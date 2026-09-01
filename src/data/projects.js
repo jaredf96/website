@@ -131,67 +131,6 @@ export const projects = [
   },
 
   {
-    slug: "resume-jd-matcher",
-    name: "Explainable Resume / JD Matching Tool",
-    tagline: "Explainable screening & tailoring engine",
-    group: "featured",
-    year: "2025",
-    status: "private",
-    repo: null,
-    repoNote: "Code available upon request.",
-    summary:
-      "An explainable resume screening and tailoring engine that scores a resume against a job description and shows its reasoning — direct matches, transferable skills, and evidence strength.",
-    context:
-      "Most matchers reward keyword stuffing and hide their logic. This one separates genuine matches from transferable ones, weighs the evidence behind each, and explains every point it awards.",
-    role: "Solo — design, NLP/scoring logic, and tooling.",
-    tech: ["Python", "NLP", "spaCy", "FastAPI", "Skill taxonomies"],
-    highlights: [
-      "Direct match vs. transferability scored separately",
-      "Evidence strength weighting per matched skill",
-      "Anti-keyword-dump logic resists gaming",
-      "Skill taxonomy maps related and adjacent skills",
-      "JD parsing extracts requirements and seniority signals",
-      "Every score is explained, not just emitted",
-    ],
-    metrics: [],
-    actions: [
-      { kind: "case-study", label: "View Case Study", to: "/work/resume-jd-matcher" },
-      { kind: "scoring", label: "Scoring Logic", to: "/work/resume-jd-matcher#scoring" },
-    ],
-    caseStudy: {
-      sections: [
-        {
-          id: "overview",
-          title: "Overview",
-          body: [
-            "An engine that reads a resume and a job description and produces an explainable match: what lines up directly, what transfers, and how strong the evidence is for each.",
-          ],
-        },
-        {
-          id: "scoring",
-          title: "Scoring Logic",
-          body: [
-            "Scoring is deliberately not a keyword count. Each requirement from the JD is matched against the resume and classified as a direct match or a transferable one, then weighted by how much supporting evidence the resume actually provides.",
-          ],
-          bullets: [
-            "Direct match vs. transferability as distinct signals",
-            "Evidence strength weighting (mention vs. demonstrated outcome)",
-            "Anti-keyword-dump penalties for unsupported claims",
-            "Skill taxonomy to credit adjacent/related skills fairly",
-          ],
-        },
-        {
-          id: "parsing",
-          title: "JD Parsing",
-          body: [
-            "The job description is parsed into structured requirements — must-haves, nice-to-haves, and seniority signals — so scoring compares like for like.",
-          ],
-        },
-      ],
-    },
-  },
-
-  {
     slug: "winston-lutz-qa",
     name: "Winston-Lutz QA Dashboard",
     tagline: "QA & data visualization for linac QA",
