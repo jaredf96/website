@@ -446,44 +446,6 @@ export const projects = [
 
   // ───────────────────────── Smaller Builds ─────────────────────────
   {
-    slug: "discord-game-alert-bot",
-    name: "Discord Game Alert Bot",
-    tagline: "Scheduled & event-based game alerts",
-    group: "smaller",
-    year: "2024",
-    status: "private",
-    repo: null,
-    repoNote: "Code available upon request.",
-    summary:
-      "A practical automation bot that posts scheduled or event-based game alerts to Discord, with clean config and deployment handling.",
-    context:
-      "A small, genuinely useful build: reliable alerts on a schedule or trigger, configured through environment variables and deployed to run unattended.",
-    role: "Solo.",
-    tech: ["Python", "discord.py", "Scheduling", "Docker"],
-    highlights: [
-      "Discord automation for scheduled and event-based alerts",
-      "Scheduling with sensible retry/failure behavior",
-      "Config and secrets via environment variables",
-      "Deployment thinking — built to run unattended",
-    ],
-    metrics: [],
-    actions: [
-      { kind: "summary", label: "View Summary", to: "/work/discord-game-alert-bot" },
-    ],
-    caseStudy: {
-      sections: [
-        {
-          id: "overview",
-          title: "Summary",
-          body: [
-            "A Discord bot that delivers game alerts on a schedule or in response to events, with configuration and deployment handled cleanly enough to leave running.",
-          ],
-        },
-      ],
-    },
-  },
-
-  {
     slug: "plane-crash-analysis",
     name: "Plane Crash Analysis",
     tagline: "Failure-mode themes from a century of crashes",
