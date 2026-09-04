@@ -1,7 +1,7 @@
 import FadeIn from "../components/motion/FadeIn";
 import { card } from "../lib/ui";
 
-// Each item here is demonstrated by a project on the Work page — no aspirational claims.
+// Each item here is demonstrated by a project on the Work page. No aspirational claims.
 const toolkit = [
   {
     area: "Cloud & Backend",
@@ -27,7 +27,7 @@ const toolkit = [
       "pandas and scikit-learn pipelines",
       "NLP: TF-IDF, clustering, skill taxonomies",
       "Data visualization and QA dashboards",
-      "Honest evaluation — limitations stated, not hidden",
+      "Honest evaluation: limitations stated, not hidden",
     ],
   },
   {
@@ -68,7 +68,7 @@ export default function About() {
             I take a systems-oriented view of software: how components interact
             across the stack, and how to design for robustness, maintainability,
             and performance. I care about solutions that are correct, tested, and
-            explainable — not just demos.
+            explainable, not just demos.
           </p>
           <p>
             Outside of work I enjoy gaming with friends, calisthenics, and side

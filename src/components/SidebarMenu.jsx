@@ -24,7 +24,7 @@ const SidebarMenu = ({ toggleDarkMode, isDarkMode, open, setOpen }) => {
 
   return (
     <>
-      {/* Hamburger (mobile only — desktop uses the top nav) */}
+      {/* Hamburger (mobile only). Desktop uses the top nav. */}
       {!open && (
         <button
           onClick={() => setOpen(true)}

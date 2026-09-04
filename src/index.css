@@ -5,7 +5,7 @@
   --font-sans: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
   --font-mono: "Fira Code", "Roboto Mono", monospace;
 
-  /* Light mode — cool neutral base */
+  /* Light mode: cool neutral base */
   --color-surface: oklch(0.985 0.002 264);
   /* near-white, faint cool tint */
   --color-surface-light: oklch(1 0 0);
@@ -20,7 +20,7 @@
   /* deep slate for contrast */
   --color-muted: oklch(0.5 0.02 264);
 
-  /* Accent — confident indigo */
+  /* Confident indigo accent */
   --color-accent: oklch(0.55 0.17 264);
   --color-accent-hover: oklch(0.49 0.18 264);
 
@@ -36,7 +36,7 @@
   --duration-spin: 300ms;
 }
 
-/* Dark mode — deep slate base */
+/* Dark mode: deep slate base */
 .dark {
   --color-surface: oklch(0.18 0.015 264);
   --color-surface-light: oklch(0.21 0.016 264);
@@ -51,7 +51,7 @@
   --shadow-medium: 0 10px 30px oklch(0 0 0 / 0.55);
 }
 
-/* Base element styles — in @layer base so utility classes (bg-*, text-*,
+/* Base element styles, in @layer base so utility classes (bg-*, text-*,
    border-*) can override them per-component. */
 @layer base {
   :root {
@@ -133,7 +133,7 @@ pre::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent-hover);
 }
 
-/* Respect users who prefer reduced motion — neutralize animations and
+/* Respect users who prefer reduced motion: neutralize animations and
    transitions globally (Motion primitives also honor this via JS). */
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -1,5 +1,5 @@
 // Shared animation tokens + variants for Motion for React.
-// Keep these values restrained — subtle rise + fade, quick springs.
+// Keep these values restrained: subtle rise + fade, quick springs.
 
 // Easing tuned to feel crisp but soft (matches --ease-snappy in spirit).
 export const EASE = [0.22, 1, 0.36, 1];

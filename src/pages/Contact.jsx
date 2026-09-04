@@ -36,7 +36,7 @@ const Contact = () => {
       <FadeIn className={`mx-auto w-full max-w-3xl ${card} p-8 sm:p-12`}>
         <h1 className="mb-2 text-center text-3xl font-bold sm:text-4xl">Get in Touch</h1>
         <p className="mb-10 text-center text-muted">
-          Feel free to reach out — I&apos;m happy to connect.
+          Feel free to reach out. I&apos;m happy to connect.
         </p>
 
         <div className="divide-y divide-border">
