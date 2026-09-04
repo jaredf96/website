@@ -73,9 +73,19 @@ function TopNav({ reduce }) {
   );
 }
 
+// Old paths kept alive so existing links keep working.
+const REDIRECTS = {
+  "/projects": "/work",
+};
+
 function App() {
   const reduce = useReducedMotion();
   const location = useLocation();
+
+  // Redirects have to resolve OUTSIDE <AnimatePresence>. A <Navigate> rendered
+  // as an animated child leaves the presence tree with nothing mounted, so the
+  // redirected URL renders a blank page between the header and the footer.
+  const redirectTo = REDIRECTS[location.pathname];
 
   // Initialise from the class set by the pre-paint script in index.html
   // (falls back to localStorage), avoiding a flash of the wrong theme.
@@ -129,28 +139,30 @@ function App() {
       {/* Main content */}
       <main className="flex-1 pt-28 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <AnimatePresence mode="wait">
-            <AnimatedPage key={location.pathname}>
-              <Suspense
-                fallback={
-                  <div className="py-20 text-center text-muted animate-pulse">Loading…</div>
-                }
-              >
-                <Routes location={location}>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/work" element={<Work />} />
-                  <Route path="/work/:slug" element={<CaseStudy />} />
-                  {/* Redirect the old route so existing links keep working */}
-                  <Route path="/projects" element={<Navigate to="/work" replace />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/resume" element={<Resume />} />
-                  <Route path="/faq" element={<FAQ />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Suspense>
-            </AnimatedPage>
-          </AnimatePresence>
+          {redirectTo ? (
+            <Navigate to={redirectTo} replace />
+          ) : (
+            <AnimatePresence mode="wait">
+              <AnimatedPage key={location.pathname}>
+                <Suspense
+                  fallback={
+                    <div className="py-20 text-center text-muted animate-pulse">Loading…</div>
+                  }
+                >
+                  <Routes location={location}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/work" element={<Work />} />
+                    <Route path="/work/:slug" element={<CaseStudy />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/resume" element={<Resume />} />
+                    <Route path="/faq" element={<FAQ />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </Suspense>
+              </AnimatedPage>
+            </AnimatePresence>
+          )}
         </div>
       </main>
 

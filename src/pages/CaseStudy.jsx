@@ -1,4 +1,4 @@
-import { useParams, Link, Navigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { getProject, getAdjacent } from "../data/projects";
 import FadeIn from "../components/motion/FadeIn";
@@ -6,6 +6,7 @@ import TechBadge from "../components/work/TechBadge";
 import ProjectActions from "../components/work/ProjectActions";
 import CaseStudyNav from "../components/work/CaseStudyNav";
 import CaseStudySection from "../components/work/CaseStudySection";
+import NotFound from "./NotFound";
 
 function PrevNextNav({ prev, next }) {
   if (!prev && !next) return null;
@@ -47,7 +48,10 @@ export default function CaseStudy() {
   const { slug } = useParams();
   const project = getProject(slug);
 
-  if (!project) return <Navigate to="/work" replace />;
+  // Render 404 in place rather than redirecting. A <Navigate> inside
+  // <AnimatePresence> leaves nothing mounted, and a silent redirect to /work
+  // hides the broken link instead of reporting it.
+  if (!project) return <NotFound />;
 
   const sections = project.caseStudy.sections;
   const { prev, next } = getAdjacent(slug);
