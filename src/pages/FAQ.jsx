@@ -34,7 +34,7 @@ export default function FAQ() {
             key={faq.question}
             className={`${card} p-6 transition-shadow duration-(--duration-medium) hover:shadow-medium`}
           >
-            <h3 className="text-lg font-semibold">{faq.question}</h3>
+            <h2 className="text-lg font-semibold">{faq.question}</h2>
             <p className="mt-2 leading-relaxed text-muted">{faq.answer}</p>
           </StaggerItem>
         ))}
