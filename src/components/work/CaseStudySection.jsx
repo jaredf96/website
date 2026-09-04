@@ -3,7 +3,7 @@ import MediaPlaceholder from "./MediaPlaceholder";
 
 export default function CaseStudySection({ section }) {
   return (
-    <FadeIn as="section" id={section.id} className="scroll-mt-28">
+    <FadeIn as="section" id={section.id} className="scroll-mt-20">
       <h2 className="text-2xl font-bold">{section.title}</h2>
 
       {section.body?.map((para, i) => (

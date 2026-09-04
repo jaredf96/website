@@ -156,7 +156,7 @@ function App() {
       <main
         id="main-content"
         tabIndex={-1}
-        className="flex-1 pt-28 px-4 sm:px-6 lg:px-8 focus:outline-none"
+        className="flex-1 pt-20 px-4 sm:px-6 lg:px-8 focus:outline-none"
       >
         <div className="max-w-7xl mx-auto">
           {redirectTo ? (

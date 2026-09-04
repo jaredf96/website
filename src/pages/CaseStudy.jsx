@@ -88,7 +88,7 @@ export default function CaseStudy() {
         {showNav && (
           <CaseStudyNav
             sections={sections}
-            className="hidden lg:block w-52 shrink-0 self-start sticky top-28"
+            className="hidden lg:block w-52 shrink-0 self-start sticky top-20"
           />
         )}
         <div
