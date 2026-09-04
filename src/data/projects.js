@@ -22,7 +22,6 @@ export const projects = [
     group: "featured",
     flagship: true,
     year: "2026",
-    status: "public",
     repo: { href: "https://github.com/jaredf96/shut-it-down-aws", label: "View on GitHub" },
     repoNote: null,
     summary:
@@ -49,7 +48,6 @@ export const projects = [
       "Scan history, diffs between scans, and alerts for new billable or riskier resources",
       "219 offline backend tests (moto) + 65 frontend tests; the demo bundle carries no API client and no credentials, asserted in CI",
     ],
-    metrics: [],
     actions: [
       {
         kind: "live",
@@ -136,7 +134,6 @@ export const projects = [
     tagline: "A tested dbt star schema over synthetic EHR data",
     group: "featured",
     year: "2026",
-    status: "public",
     repo: {
       href: "https://github.com/jaredf96/health-analytics",
       label: "View on GitHub",
@@ -165,7 +162,6 @@ export const projects = [
       "No model reads the clock, so every number in the README is reproducible from a build on any machine on any day",
       "A decision log of 18 entries, each recording what was decided against and what would reopen it",
     ],
-    metrics: [],
     actions: [
       {
         kind: "live",
@@ -242,7 +238,6 @@ export const projects = [
     tagline: "Evidence-first resume-to-JD matching that shows its work",
     group: "featured",
     year: "2025",
-    status: "public",
     repo: {
       href: "https://github.com/jaredf96/explainable-resume-screener",
       label: "View on GitHub",
@@ -271,7 +266,6 @@ export const projects = [
       "Every matched skill is backed by a snippet quoted from the redacted resume text, labeled strong/moderate/weak",
       "117 offline tests, including a labeled regression harness with a project rule against tuning weights from single anecdotes",
     ],
-    metrics: [],
     actions: [
       {
         kind: "live",
@@ -351,7 +345,6 @@ export const projects = [
     tagline: "QA & data visualization for linac QA",
     group: "featured",
     year: "2024",
-    status: "private",
     repo: null,
     repoNote: "Private repository. Case study available.",
     summary:
@@ -366,7 +359,6 @@ export const projects = [
       "Technical communication of a specialized QA workflow",
       "Required learning the clinical domain from the ground up",
     ],
-    metrics: [],
     actions: [
       { kind: "case-study", label: "View Case Study", to: "/work/winston-lutz-qa" },
       { kind: "dashboard", label: "Dashboard Preview", to: "/work/winston-lutz-qa#dashboard" },
@@ -424,7 +416,6 @@ export const projects = [
     tagline: "Accuracy-first calorie & macro logging",
     group: "featured",
     year: "2026",
-    status: "private",
     repo: null,
     repoNote: "Private repository. Case study available.",
     summary:
@@ -440,7 +431,6 @@ export const projects = [
       "Postgres with row-level security via Supabase Auth (SSR)",
       "Six unit-test suites: nutrition math, USDA + Open Food Facts clients, auth guard, DB layer",
     ],
-    metrics: [],
     actions: [
       { kind: "case-study", label: "View Case Study", to: "/work/caltracker" },
       { kind: "architecture", label: "Data Model", to: "/work/caltracker#model" },
@@ -493,7 +483,6 @@ export const projects = [
     tagline: "Local-first PWA with a deterministic progression engine",
     group: "featured",
     year: "2026",
-    status: "public",
     repo: { href: "https://github.com/jaredf96/personal-gym-tracker", label: "View on GitHub" },
     repoNote: null,
     summary:
@@ -509,7 +498,6 @@ export const projects = [
       "Last-session comparison, exercise swaps, session editing, and plate math",
       "Engine behaviors covered by a Vitest suite; delivered in hardening phases (data safety → engine truthfulness → UX)",
     ],
-    metrics: [],
     actions: [
       { kind: "case-study", label: "View Case Study", to: "/work/gym-tracker" },
       { kind: "scoring", label: "Progression Engine", to: "/work/gym-tracker#engine" },
@@ -564,7 +552,6 @@ export const projects = [
     tagline: "Failure-mode themes from a century of crashes",
     group: "smaller",
     year: "2023",
-    status: "public",
     repo: null,
     repoNote: null,
     summary:
@@ -579,7 +566,6 @@ export const projects = [
       "Five interpretable failure-mode themes (engine, weather, landing, takeoff, hostile action)",
       "Reframed 'cause prediction' as honest nearest-theme assignment",
     ],
-    metrics: [],
     actions: [
       { kind: "case-study", label: "View Case Study", to: "/work/plane-crash-analysis" },
       {
@@ -652,7 +638,6 @@ export const projects = [
     tagline: "ML pricing model + interactive Streamlit app",
     group: "smaller",
     year: "2023",
-    status: "public",
     repo: { href: "https://github.com/jaredf96/4122", label: "View on GitHub" },
     repoNote: null,
     summary:
@@ -668,7 +653,6 @@ export const projects = [
       "Interactive Streamlit app: brand comparisons, price-filtered charts, live predictions",
       "Deployed and publicly accessible on Streamlit Community Cloud",
     ],
-    metrics: [],
     actions: [
       { kind: "summary", label: "View Summary", to: "/work/car-price-predictor" },
       {
@@ -721,7 +705,6 @@ export const projects = [
     tagline: "A living frontend case study",
     group: "smaller",
     year: "2025",
-    status: "public",
     repo: { href: "https://github.com/jaredf96/website", label: "View on GitHub" },
     repoNote: null,
     summary:
@@ -737,7 +720,6 @@ export const projects = [
       "Accessibility and prefers-reduced-motion as first-class concerns",
       "Responsive from mobile to desktop",
     ],
-    metrics: [],
     actions: [
       { kind: "live", label: "Live Site", to: "/" },
       { kind: "case-study", label: "Case Study", to: "/work/portfolio-rebuild" },

@@ -6,7 +6,7 @@ import ProjectActions from "./ProjectActions";
 
 /**
  * Project card for the Work index.
- * variant="featured" shows highlights + metrics; "smaller" is compact.
+ * variant="featured" shows highlights; "smaller" is compact.
  */
 export default function ProjectCard({ project, variant = "featured" }) {
   const featured = variant === "featured";
@@ -48,17 +48,6 @@ export default function ProjectCard({ project, variant = "featured" }) {
             </li>
           ))}
         </ul>
-      )}
-
-      {featured && project.metrics?.length > 0 && (
-        <div className="mt-5 flex flex-wrap gap-8">
-          {project.metrics.map((m) => (
-            <div key={m.label}>
-              <div className="text-lg font-semibold">{m.value}</div>
-              <div className="text-xs text-muted">{m.label}</div>
-            </div>
-          ))}
-        </div>
       )}
 
       <div className="mt-5 flex flex-wrap gap-2">
