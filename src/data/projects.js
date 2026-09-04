@@ -144,7 +144,7 @@ export const projects = [
     },
     repoNote: null,
     summary:
-      "A dbt project over synthetic electronic health record data: six staged source feeds, a star schema of six conformed dimensions and one encounter fact at 61,459 rows, 180 data-quality tests, HIPAA Safe Harbor de-identification enforced by a test, and CI that builds all of it and publishes the generated documentation on every push. It runs on DuckDB with no account and no credentials: a script fetches the ~565 MB source export once, and the dbt build over it takes about 1.5 seconds.",
+      "A dbt project over synthetic electronic health record data: six staged source feeds, a star schema of seven conformed dimensions and two facts at 61,459 encounters and 38,094 conditions, 202 data-quality tests, HIPAA Safe Harbor de-identification enforced by two tests, and CI that builds all of it and publishes the generated documentation on every push. It runs on DuckDB with no account and no credentials: a script fetches the ~565 MB source export once, and the dbt build over it takes under two seconds.",
     context:
       "Healthcare analytics work is mostly the unglamorous middle: turning a raw clinical export into models other people can trust, then proving they can. This project does that end to end on Synthea data, which is entirely synthetic and carries no PHI while keeping the shape of a real EHR export.",
     role: "Solo. Sources, staging, dimensional design, tests, documentation and CI.",
@@ -158,13 +158,14 @@ export const projects = [
       "Synthea",
     ],
     highlights: [
-      "Star schema of six conformed dimensions and one fact at the encounter grain, 61,459 rows, keyed on the natural identifiers the feed supplies rather than hashed surrogates",
-      "180 tests: 122 not_null, 20 unique, 14 relationships, 14 accepted_values and 10 singular assertions. Every foreign key in the project resolves with zero orphans",
-      "Money reconciles to the cent between the fact and its source: 255,033,828.08 billed, 63,530,758.42 covered by payers, 191,503,069.66 left with patients",
-      "HIPAA Safe Harbor applied in the mart and enforced by a test that reads information_schema, so a column that reintroduces an identifier fails the build rather than a review",
+      "Star schema of seven conformed dimensions and two facts, 61,459 encounters and 38,094 conditions, keyed on the natural identifiers the feed supplies rather than hashed surrogates. The patient and date dimensions are shared across both facts, and the condition fact joins the date dimension twice, once for the start of the condition and once for its end",
+      "202 tests: 134 not_null, 21 unique, 19 relationships, 14 accepted_values and 14 singular assertions. Every foreign key in the project resolves with zero orphans",
+      "Money reconciles to the cent between the encounter fact and its source: 255,033,828.08 billed, 63,530,758.42 covered by payers, 191,503,069.66 uncovered. The column is named uncovered_amount and not patient responsibility, because in a real revenue cycle that residual is mostly the contractual adjustment between charges and the negotiated rate, and Synthea carries neither adjustments nor allowed amounts",
+      "HIPAA Safe Harbor applied in the patient dimension and enforced by two tests, because one was not enough. A test that reads information_schema catches a forbidden column, but not a permitted birth year sitting beside a capped age, where one subtraction undoes the cap. The second reads the data and asserts the closure across both facts",
       "A known generator defect is priced, not hidden: 165 of 61,459 encounters start after the patient's recorded death date, asserted at warn severity so the number is reported every run and becomes a failure if it grows",
+      "A count of conditions is not a count of diagnoses, and the model says so: 29,749 of the 38,094 rows are SNOMED findings rather than disorders, and the most common code in the whole fact is Full-time employment",
       "No model reads the clock, so every number in the README is reproducible from a build on any machine on any day",
-      "A decision log of 18 entries, each recording what was decided against and what would reopen it",
+      "A decision log of 23 entries, each recording what was decided against and what would reopen it",
     ],
     actions: [
       {
@@ -202,24 +203,26 @@ export const projects = [
           id: "model",
           title: "The Dimensional Model",
           body: [
-            "Six dimensions and one fact at the encounter grain. The dimensions resolve real problems in the feed rather than renaming columns.",
+            "Seven dimensions and two facts, one at the encounter grain and one at the condition grain. The dimensions resolve real problems in the feed rather than renaming columns, and the second fact is the shape of the star rather than an addition to it.",
           ],
           bullets: [
-            "dim_encounter_type picks one description per SNOMED code, because the feed supplies several spellings for six of them. Encounter class is not an attribute of the code, since five codes appear in more than one class, so class stays on the fact as a degenerate dimension",
+            "The condition fact shares the patient and date dimensions with the encounter fact and references the encounter rather than re-describing it, so the two can be summarized separately and lined up on the same attributes. Joining the facts to each other instead fans an encounter out once per condition and drops the 34,555 that recorded none, so it is wrong in both directions at once",
+            "dim_encounter_type and dim_condition each pick one description per SNOMED code, because the feed supplies several spellings for some of them. Encounter class is not an attribute of the code, since five codes appear in more than one class, so class stays on the fact as a degenerate dimension",
             "dim_payer sorts ten payers into self pay, public and commercial. Synthea's self-pay stand-in is the payer on 13,620 of 61,459 encounters, so leaving it uncategorized would inflate commercial volume by 41 percent",
             "dim_provider drops address columns that repeated the employing organization's address rather than carrying a clinician's own. Geography belongs to dim_organization, once",
-            "dim_date is a spine anchored to the first and last encounter in the data, 1912-09-26 to 2021-11-19, keyed on the day as a YYYYMMDD integer",
+            "dim_date is a spine anchored to the first and last encounter in the data, 1912-09-26 to 2021-11-19, keyed on the day as a YYYYMMDD integer. The condition fact joins it twice in two roles, for the start and the end of the condition, rather than carrying a second date table",
           ],
         },
         {
           id: "quality",
           title: "Data Quality",
           body: [
-            "180 tests run on every build, in CI and locally, with identical results. The interesting ones are the assertions no generic test covers.",
+            "202 tests run on every build, in CI and locally, with identical results. The interesting ones are the assertions no generic test covers.",
           ],
           bullets: [
-            "Encounter and condition periods do not end before they start. A payer never covers more than the encounter was billed. Patient responsibility is never negative",
-            "The conditions feed has no key column, so a test asserts its grain instead of pretending one exists",
+            "Encounter and condition periods do not end before they start. A payer never covers more than the encounter was billed, so the uncovered residual is never negative",
+            "The conditions feed has no key column, so one test asserts its grain in staging and a second asserts the fact preserved it. Neither fact filters anything, which is checked by comparing each one row for row against its staging model",
+            "The two facts have to agree about who was seen. Both foreign keys on a condition row can resolve while pointing at different patients, which no relationships test can see, so a singular test asserts they match",
             "One test warns on purpose. 165 encounters start after the patient's recorded death date, one to fourteen days after, across 154 patients. Filtering them would make the fact silently disagree with its source, so the build reports the count instead and prices the defect at 0.27 percent",
             "A pre-publication audit against the built warehouse caught an age column computing calendar-year boundaries rather than completed years, wrong on 29,831 of 61,459 rows. It is now one macro both models call",
           ],
@@ -228,14 +231,15 @@ export const projects = [
           id: "governance",
           title: "Governance",
           body: [
-            "The patient dimension is de-identified to the HIPAA Safe Harbor standard. Names, street address, city, county, coordinates and full dates stay in staging and never reach the mart. Dates become years, ZIP becomes its first three digits with the seventeen prefixes HHS restricts replaced by 000, and any age over 89 is reported as 90.",
-            "The data is synthetic, so this protects nobody. That is the point: the rule is the deliverable. A test reads information_schema and fails the build if a forbidden column reappears, so the policy is enforced by CI rather than by trust.",
+            "The patient dimension is de-identified to the HIPAA Safe Harbor standard. Names, street address, city, county and coordinates stay in staging. Dates become years, ZIP becomes its first three digits with the seventeen prefixes HHS restricts replaced by 000, and everyone over 89 is aggregated into a single category.",
+            "That last part is the one worth reading closely, because capping the age is not enough on its own. The rule removes the elements of dates, the year included, that would reveal an age over 89, so the dimension withholds birth_year and death_year for those 35 patients rather than publishing them beside a capped age. Keeping the years would let one subtraction undo the cap, and joining a birth year to a date on a fact would undo it for every row of that patient. The highest age any combination of published columns now yields is 89.",
+            "The claim is scoped to that one model. Both facts keep the dates of care on purpose, because a fact that cannot say when something happened is not much of a fact, so the mart layer as a whole is not a Safe Harbor data set and only the patient dimension claims to be.",
+            "The data is synthetic, so this protects nobody. That is the point: the rule is the deliverable, and the difference between the two tests that enforce it is the lesson. One reads information_schema and fails the build if a forbidden column reappears, but it knows only column names, and it could not have seen the leak above. The other reads the data and asserts that no combination of columns recovers an age the rule hides. A control that checks names is not a control that checks the rule.",
           ],
         },
       ],
     },
   },
-
   {
     slug: "resume-screener",
     name: "Explainable Resume Screener",
