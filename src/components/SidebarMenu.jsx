@@ -19,7 +19,7 @@ const SidebarMenu = ({ toggleDarkMode, isDarkMode, open, setOpen }) => {
 
   const linkClasses = ({ isActive }) =>
     isActive
-      ? "flex items-center gap-3 px-4 py-2 rounded-base bg-accent text-white transition-colors duration-(--duration-medium)"
+      ? "flex items-center gap-3 px-4 py-2 rounded-base bg-accent text-on-accent transition-colors duration-(--duration-medium)"
       : "flex items-center gap-3 px-4 py-2 rounded-base text-text hover:bg-surface-light transition-colors duration-(--duration-medium)";
 
   return (
@@ -28,7 +28,7 @@ const SidebarMenu = ({ toggleDarkMode, isDarkMode, open, setOpen }) => {
       {!open && (
         <button
           onClick={() => setOpen(true)}
-          className="md:hidden fixed top-4 left-4 z-50 text-white bg-accent p-2 rounded-base hover:bg-accent-hover transition-all duration-(--duration-medium) hover:scale-105"
+          className="md:hidden fixed top-4 left-4 z-50 text-on-accent bg-accent p-2 rounded-base hover:bg-accent-hover transition-all duration-(--duration-medium) hover:scale-105"
           aria-label="Open menu"
         >
           <Menu size={28} />
@@ -45,7 +45,11 @@ const SidebarMenu = ({ toggleDarkMode, isDarkMode, open, setOpen }) => {
       />
 
       {/* Sidebar */}
+      {/* The panel stays mounted so it can slide, so it has to be inert while
+          closed. Without this its 8 controls are the first tab stops on every
+          page, off-screen at x=-232. */}
       <aside
+        inert={!open}
         className={`fixed top-0 left-0 h-full w-64 bg-surface-light text-text z-50 p-6 shadow-soft border-r border-muted/10 transform transition-transform duration-(--duration-medium) ease-snappy ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}

@@ -110,6 +110,19 @@ function App() {
     <div className="relative flex min-h-screen flex-col bg-surface text-text transition-colors duration-(--duration-medium)">
       <ScrollManager />
 
+      {/* First tab stop on every page. Moves focus rather than pushing a hash
+          the router does not own. */}
+      <a
+        href="#main-content"
+        onClick={(e) => {
+          e.preventDefault();
+          document.getElementById("main-content")?.focus();
+        }}
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-base focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-on-accent"
+      >
+        Skip to content
+      </a>
+
       {/* Slide-over sidebar + backdrop (mobile primary, available everywhere) */}
       <SidebarMenu
         toggleDarkMode={toggleDarkMode}
@@ -137,7 +150,11 @@ function App() {
       </header>
 
       {/* Main content */}
-      <main className="flex-1 pt-28 px-4 sm:px-6 lg:px-8">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 pt-28 px-4 sm:px-6 lg:px-8 focus:outline-none"
+      >
         <div className="max-w-7xl mx-auto">
           {redirectTo ? (
             <Navigate to={redirectTo} replace />
