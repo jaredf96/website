@@ -143,7 +143,7 @@ export const projects = [
     },
     repoNote: null,
     summary:
-      "A dbt project over synthetic electronic health record data: six staged source feeds, a star schema of six conformed dimensions and one encounter fact at 61,459 rows, 180 data-quality tests, HIPAA Safe Harbor de-identification enforced by a test, and CI that builds all of it and publishes the generated documentation on every push. It runs on DuckDB with no account and no credentials, so a fresh clone builds in about 1.5 seconds.",
+      "A dbt project over synthetic electronic health record data: six staged source feeds, a star schema of six conformed dimensions and one encounter fact at 61,459 rows, 180 data-quality tests, HIPAA Safe Harbor de-identification enforced by a test, and CI that builds all of it and publishes the generated documentation on every push. It runs on DuckDB with no account and no credentials: a script fetches the ~565 MB source export once, and the dbt build over it takes about 1.5 seconds.",
     context:
       "Healthcare analytics work is mostly the unglamorous middle: turning a raw clinical export into models other people can trust, then proving they can. This project does that end to end on Synthea data, which is entirely synthetic and carries no PHI while keeping the shape of a real EHR export.",
     role: "Solo. Sources, staging, dimensional design, tests, documentation and CI.",
