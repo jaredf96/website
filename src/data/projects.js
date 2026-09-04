@@ -76,7 +76,7 @@ export const projects = [
             "Lab accounts drift. People spin up instances for an experiment and forget them; volumes outlive the instances they backed; Elastic IPs keep billing after everything they pointed at is gone.",
           ],
           bullets: [
-            "Detect billable leftovers: idle compute, orphaned storage, unassociated addresses. State a minimum monthly exposure for each.",
+            "Detect billable leftovers (idle compute, orphaned storage, unassociated addresses) and state a minimum monthly exposure for each.",
             "Explain every finding in plain English: why it costs money, and what the safe next action is.",
             "Make cleanup reversible and auditable, not a scary one-way delete.",
           ],
@@ -326,7 +326,7 @@ export const projects = [
           body: [
             "Against the bundled senior-backend JD, the three fictional sample resumes separate exactly as designed: the strong candidate scores 93/100 with six of six requirements demonstrated, the partial one lands at 43/100 with AWS, CI/CD, and Docker flagged as missing, and the off-field marketer reads 0/100 direct with modest transferability rather than a fake middling score.",
             "Every number is inspectable: expanding a candidate shows the evidence bucket for each requirement, the quoted snippet behind each match, and review flags a recruiter should verify by hand.",
-            "The live demo above is the same app, with nothing to download: load the built-in sample JD, tick the bundled fictional resumes, and reproduce this exact run.",
+            "The live demo above is the same app: load the built-in sample JD, tick the bundled fictional resumes, and reproduce this exact run. Nothing to download.",
           ],
           media: [
             {
@@ -458,7 +458,7 @@ export const projects = [
           title: "Overview",
           body: [
             "CalTracker is a single-user calorie and macro logger built around one conviction: the kitchen scale is the only number you should trust. Label and database values are starting points, not truth.",
-            "The product goal is speed without ever compromising the integrity of the daily totals: logging a weighed meal should take seconds.",
+            "The product goal is speed: logging a weighed meal should take seconds, without ever compromising the integrity of the daily totals.",
           ],
         },
         {
@@ -485,7 +485,7 @@ export const projects = [
           id: "testing",
           title: "Testing & Tradeoffs",
           body: [
-            "The parts that can silently lie are the parts under test: the nutrition math, the USDA and Open Food Facts API clients, the auth guard, and the database layer, covered by six Vitest suites in strict TypeScript.",
+            "The parts that can silently lie are the parts under test, covered by six Vitest suites in strict TypeScript: the nutrition math, the USDA and Open Food Facts API clients, the auth guard, and the database layer.",
             "Notable tradeoffs: deriving totals costs reads but eliminates a whole class of stale-data bugs; quarantining imports adds a tap but keeps garbage out of the log; and database errors are propagated to the UI rather than rendering empty states that look like truth.",
           ],
         },
@@ -504,7 +504,7 @@ export const projects = [
     summary:
       "A local-first, offline-capable PWA for fast workout logging, with a deterministic, rule-based progressive-overload engine that explains every suggestion, and optional cloud sync when you want it.",
     context:
-      "A 'Notes-app upgrade' for the gym: log sets in seconds, see last session at a glance, and get progression suggestions you can actually audit. They are computed by rules, not vibes. Data lives on-device and the app works fully offline; Supabase sync is strictly opt-in.",
+      "A 'Notes-app upgrade' for the gym: log sets in seconds, see last session at a glance, and get progression suggestions you can actually audit, computed by rules rather than vibes. Data lives on-device and the app works fully offline; Supabase sync is strictly opt-in.",
     role: "Solo: product, engine design, frontend, sync.",
     tech: ["React", "TypeScript", "Dexie (IndexedDB)", "PWA", "Supabase", "Vitest"],
     highlights: [
@@ -533,7 +533,7 @@ export const projects = [
           title: "Deterministic Progression Engine",
           body: [
             "Progressive overload is handled by a rule-based engine, deliberately not an ML model: given your history, it produces the same suggestion every time, and each rule can be read, tested, and argued with.",
-            "The engine is decomposed into nine focused modules, each independently unit-tested with Vitest: progression, deload, rotation, schedule, volume, comparison, readiness flags, analysis, and stats.",
+            "The engine is decomposed into nine focused modules: progression, deload, rotation, schedule, volume, comparison, readiness flags, analysis, and stats. Each is independently unit-tested with Vitest.",
           ],
         },
         {
@@ -711,7 +711,7 @@ export const projects = [
           id: "app",
           title: "The App",
           body: [
-            "A Streamlit app with two tabs. The Visualizations tab has brand-vs-brand comparisons (cars per model, average price by year, MPG by fuel type, transmission mix), filterable by dataset and price range. The Predictions tab is where you spec a car and get a price.",
+            "A Streamlit app with two tabs. The Visualizations tab has brand-vs-brand comparisons (cars per model, average price by year, MPG by fuel type, transmission mix), filterable by dataset and price range. On the Predictions tab you spec a car and get a price.",
             "Dataset loads and the ~12 MB model are cached per session, and the trained model ships with the repo via joblib, so the app runs without retraining.",
             "It's deployed on Streamlit Community Cloud and open to anyone. The Live Demo link above runs the same model described here.",
           ],
