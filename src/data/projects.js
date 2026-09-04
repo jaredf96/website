@@ -568,7 +568,10 @@ export const projects = [
     tagline: "Failure-mode themes from a century of crashes",
     group: "smaller",
     year: "2023",
-    repo: null,
+    repo: {
+      href: "https://github.com/jaredf96/plane-crash-analysis",
+      label: "View on GitHub",
+    },
     repoNote: null,
     summary:
       "An exploratory analysis of ~5,200 aviation accidents (1908–2009) that uses unsupervised NLP to surface recurring failure-mode themes from free-text crash summaries.",
@@ -587,7 +590,7 @@ export const projects = [
       {
         kind: "notes",
         label: "Notebook",
-        to: "/notebooks/plane-crash-analysis.ipynb",
+        to: "https://github.com/jaredf96/plane-crash-analysis/blob/main/plane-crash-analysis.ipynb",
         external: true,
       },
     ],

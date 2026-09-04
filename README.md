@@ -36,7 +36,6 @@ src/
   lib/                 shared class strings and animation tokens
 public/
   images/              case study screenshots
-  notebooks/           the executed plane crash analysis notebook
 ```
 
 ## Adding or editing a project
