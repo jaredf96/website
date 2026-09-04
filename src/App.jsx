@@ -18,7 +18,10 @@ const FAQ = lazy(() => import("./pages/FAQ"));
 
 // Scroll to top on route change, or to the hash target for deep links.
 function ScrollManager() {
-  const { pathname, hash } = useLocation();
+  // `key` is fresh on every navigation, including one to the URL already shown.
+  // Without it, clicking an in-page action a second time does nothing, because
+  // pathname and hash are unchanged and the effect never re-runs.
+  const { pathname, hash, key } = useLocation();
 
   useEffect(() => {
     if (hash) {
@@ -33,7 +36,7 @@ function ScrollManager() {
       return () => timers.forEach(clearTimeout);
     }
     window.scrollTo(0, 0);
-  }, [pathname, hash]);
+  }, [pathname, hash, key]);
 
   return null;
 }

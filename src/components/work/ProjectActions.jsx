@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   BookOpen,
   FileText,
@@ -31,9 +31,21 @@ const BASE =
  * Renders a project's typed action buttons plus repo/privacy state.
  * A GitHub button only appears when `project.repo` is set; otherwise the
  * privacy note (e.g. "Private repository. Case study available.") is shown.
+ *
+ * Actions pointing at the page being rendered are dropped, so the case study
+ * does not offer a "View Case Study" button back to itself. In-page anchors
+ * (#architecture) are kept: on the case study they scroll, on the index they
+ * navigate.
  */
 export default function ProjectActions({ project }) {
-  const { actions = [], repo, repoNote } = project;
+  const { pathname } = useLocation();
+  const { actions: allActions = [], repo, repoNote } = project;
+
+  const actions = allActions.filter(
+    (action) => action.external || action.to !== pathname
+  );
+
+  if (actions.length === 0 && !repo && !repoNote) return null;
 
   return (
     <div className="flex flex-wrap items-center gap-2.5">
@@ -41,7 +53,7 @@ export default function ProjectActions({ project }) {
         const Icon = ICONS[action.kind] ?? BookOpen;
         const primary = i === 0;
         const cls = primary
-          ? `${BASE} bg-accent text-white hover:bg-accent-hover`
+          ? `${BASE} bg-accent text-on-accent hover:bg-accent-hover`
           : `${BASE} border border-border text-muted hover:text-accent hover:border-accent`;
         const inner = (
           <>
