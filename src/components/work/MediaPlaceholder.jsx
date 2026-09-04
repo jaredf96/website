@@ -48,6 +48,8 @@ function Lightbox({ media, onClose, reduce }) {
         <img
           src={media.src}
           alt={media.label}
+          width={media.width}
+          height={media.height}
           className="max-h-[85vh] w-auto max-w-full rounded-xl bg-white"
         />
         <figcaption className="mt-3 text-center text-sm text-white/80">
@@ -64,7 +66,7 @@ function Lightbox({ media, onClose, reduce }) {
  * click to enlarge); without it, a framed "coming soon" placeholder.
  * Spacing/layout is owned by the parent (CaseStudySection).
  *
- * media: { kind: "video" | "image", label, src? }
+ * media: { kind: "video" | "image", label, src?, width?, height? }
  */
 export default function MediaPlaceholder({ media }) {
   const [open, setOpen] = useState(false);
@@ -84,8 +86,10 @@ export default function MediaPlaceholder({ media }) {
             <img
               src={media.src}
               alt={media.label}
+              width={media.width}
+              height={media.height}
               loading="lazy"
-              className="w-full rounded-xl border border-border bg-white transition-colors duration-(--duration-medium) hover:border-accent"
+              className="h-auto w-full rounded-xl border border-border bg-white transition-colors duration-(--duration-medium) hover:border-accent"
             />
           </button>
           <figcaption className="mt-2 text-center text-xs text-muted">

@@ -115,11 +115,15 @@ export const projects = [
             {
               kind: "image",
               src: "/images/shut-it-down-scan.png",
+              width: 1001,
+              height: 1600,
               label: "A scan: minimum monthly exposure, risk ranking, and a suggested action per finding",
             },
             {
               kind: "image",
               src: "/images/shut-it-down-cleanup.png",
+              width: 1600,
+              height: 839,
               label: "Guided cleanup: dry-run, type-to-confirm, and the audited gate sequence",
             },
           ],
@@ -303,6 +307,8 @@ export const projects = [
           media: {
             kind: "image",
             src: "/images/resume-screener-breakdown.png",
+            width: 2024,
+            height: 1118,
             label: "Per-candidate breakdown: dual scores, evidence buckets, and the component table behind every point",
           },
         },
@@ -326,11 +332,15 @@ export const projects = [
             {
               kind: "image",
               src: "/images/resume-screener-dashboard.png",
+              width: 2024,
+              height: 1968,
               label: "Ranked dashboard: parsed JD, applied weights, and dual scores per candidate",
             },
             {
               kind: "image",
               src: "/images/resume-screener-evidence.png",
+              width: 2024,
+              height: 1002,
               label: "Evidence view: skill classification, quoted snippets from redacted text, and review flags",
             },
           ],
@@ -384,11 +394,15 @@ export const projects = [
             {
               kind: "image",
               src: "/images/winston-lutz-polar.png",
+              width: 1440,
+              height: 1000,
               label: "Radiation-field deviation by gantry angle vs. the 1 mm tolerance ring",
             },
             {
               kind: "image",
               src: "/images/winston-lutz-scatter.png",
+              width: 1440,
+              height: 1150,
               label: "Field-centre offset relative to the ball-bearing phantom",
             },
           ],
@@ -403,6 +417,8 @@ export const projects = [
           media: {
             kind: "image",
             src: "/images/winston-lutz-report.png",
+            width: 1100,
+            height: 1911,
             label: "Exported QA report: 13 measurements, two couch rotations out of tolerance, overall FAIL",
           },
         },
@@ -613,6 +629,8 @@ export const projects = [
           media: {
             kind: "image",
             src: "/images/plane-crash-clusters.png",
+            width: 783,
+            height: 583,
             label: "Crash-summary clusters: TF-IDF + K-Means, SVD projection",
           },
         },

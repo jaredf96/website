@@ -47,6 +47,8 @@ export default function Home() {
               <img
                 src="/canon.jpg"
                 alt="Portrait of Jared Fulk"
+                width={306}
+                height={365}
                 className="h-full w-full object-cover"
               />
             </div>
