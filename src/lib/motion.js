@@ -11,7 +11,13 @@ export const DURATION = {
 };
 
 // Default viewport config for scroll reveals: animate once, a little early.
-export const VIEWPORT = { once: true, amount: 0.2, margin: "0px 0px -10% 0px" };
+// `amount` is a fraction of the ELEMENT, not of the viewport, so a numeric
+// threshold breaks on anything taller than the screen: the Work index's
+// featured list is ~2700px, of which only ~400px is on screen at rest, and it
+// would sit invisible until you scrolled. Past ~5x the viewport height the
+// ratio can never reach a threshold like 0.2 at all. "some" reveals as soon as
+// the element enters; the negative bottom margin still holds it back a little.
+export const VIEWPORT = { once: true, amount: "some", margin: "0px 0px -10% 0px" };
 
 // Reusable variants ---------------------------------------------------------
 
