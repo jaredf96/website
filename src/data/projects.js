@@ -509,7 +509,7 @@ export const projects = [
           id: "themes",
           title: "Failure-Mode Themes",
           body: [
-            "TF-IDF over the crash summaries feeds a K-Means model (k=5); a 2-D projection makes the clusters legible. The five clusters are interpretable and stable:",
+            "TF-IDF over the crash summaries feeds a K-Means model (k=5); a 2-D projection makes the clusters legible. The five clusters are interpretable, though k was chosen heuristically rather than validated:",
           ],
           bullets: [
             "Hostile action & midair events (shootdowns, missiles, collisions)",
