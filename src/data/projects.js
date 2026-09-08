@@ -144,7 +144,7 @@ export const projects = [
     },
     repoNote: null,
     summary:
-      "A dbt project over synthetic electronic health record data: six staged source feeds, a star schema of seven conformed dimensions and two facts at 61,459 encounters and 38,094 conditions, 202 data-quality tests, HIPAA Safe Harbor de-identification enforced by two tests, and CI that builds all of it and publishes the generated documentation on every push. It runs on DuckDB with no account and no credentials: a script fetches the ~565 MB source export once, and the dbt build over it takes under two seconds.",
+      "A dbt project over synthetic electronic health record data: six staged source feeds, a star schema of seven conformed dimensions and two facts at 61,459 encounters and 38,094 conditions, 204 data-quality tests, HIPAA Safe Harbor de-identification enforced by two tests, and CI that builds all of it and publishes the generated documentation on every push. It runs on DuckDB with no account and no credentials: a script fetches the ~565 MB source export once, and the dbt build over it takes under two seconds.",
     context:
       "Healthcare analytics work is mostly the unglamorous middle: turning a raw clinical export into models other people can trust, then proving they can. This project does that end to end on Synthea data, which is entirely synthetic and carries no PHI while keeping the shape of a real EHR export.",
     role: "Solo. Sources, staging, dimensional design, tests, documentation and CI.",
@@ -159,13 +159,13 @@ export const projects = [
     ],
     highlights: [
       "Star schema of seven conformed dimensions and two facts, 61,459 encounters and 38,094 conditions, keyed on the natural identifiers the feed supplies rather than hashed surrogates. The patient and date dimensions are shared across both facts, and the condition fact joins the date dimension twice, once for the start of the condition and once for its end",
-      "202 tests: 134 not_null, 21 unique, 19 relationships, 14 accepted_values and 14 singular assertions. Every foreign key in the project resolves with zero orphans",
+      "204 tests: 135 not_null, 21 unique, 19 relationships, 15 accepted_values and 14 singular assertions. Every foreign key in the project resolves with zero orphans",
       "Money reconciles to the cent between the encounter fact and its source: 255,033,828.08 billed, 63,530,758.42 covered by payers, 191,503,069.66 uncovered. The column is named uncovered_amount and not patient responsibility, because in a real revenue cycle that residual is mostly the contractual adjustment between charges and the negotiated rate, and Synthea carries neither adjustments nor allowed amounts",
       "HIPAA Safe Harbor applied in the patient dimension and enforced by two tests, because one was not enough. A test that reads information_schema catches a forbidden column, but not a permitted birth year sitting beside a capped age, where one subtraction undoes the cap. The second reads the data and asserts the closure across both facts",
       "A known generator defect is priced, not hidden: 165 of 61,459 encounters start after the patient's recorded death date, asserted at warn severity so the number is reported every run and becomes a failure if it grows",
       "A count of conditions is not a count of diagnoses, and the model says so: 29,749 of the 38,094 rows are SNOMED findings rather than disorders, and the most common code in the whole fact is Full-time employment",
       "No model reads the clock, so every number in the README is reproducible from a build on any machine on any day",
-      "A decision log of 23 entries, each recording what was decided against and what would reopen it",
+      "A decision log of 24 entries, each recording what was decided against and what would reopen it",
     ],
     actions: [
       {
@@ -208,7 +208,7 @@ export const projects = [
           bullets: [
             "The condition fact shares the patient and date dimensions with the encounter fact and references the encounter rather than re-describing it, so the two can be summarized separately and lined up on the same attributes. Joining the facts to each other instead fans an encounter out once per condition and drops the 34,555 that recorded none, so it is wrong in both directions at once",
             "dim_encounter_type and dim_condition each pick one description per SNOMED code, because the feed supplies several spellings for some of them. Encounter class is not an attribute of the code, since five codes appear in more than one class, so class stays on the fact as a degenerate dimension",
-            "dim_payer sorts ten payers into self pay, public and commercial. Synthea's self-pay stand-in is the payer on 13,620 of 61,459 encounters, so leaving it uncategorized would inflate commercial volume by 41 percent",
+            "dim_payer groups ten payers twice, at two widths. payer_financial_class names the program that pays and keeps Medicare, Medicaid and dual eligible apart, because those three pay at different rates; payer_category rolls them into public for the reads that want the sector. The rollup is derived from the class rather than mapped from the payer name a second time, so the two cannot disagree. Synthea's self-pay stand-in is the payer on 13,620 of 61,459 encounters, so leaving it unclassed would inflate commercial volume by 41 percent",
             "dim_provider drops address columns that repeated the employing organization's address rather than carrying a clinician's own. Geography belongs to dim_organization, once",
             "dim_date is a spine anchored to the first and last encounter in the data, 1912-09-26 to 2021-11-19, keyed on the day as a YYYYMMDD integer. The condition fact joins it twice in two roles, for the start and the end of the condition, rather than carrying a second date table",
           ],
@@ -217,7 +217,7 @@ export const projects = [
           id: "quality",
           title: "Data Quality",
           body: [
-            "202 tests run on every build, in CI and locally, with identical results. The interesting ones are the assertions no generic test covers.",
+            "204 tests run on every build, in CI and locally, with identical results. The interesting ones are the assertions no generic test covers.",
           ],
           bullets: [
             "Encounter and condition periods do not end before they start. A payer never covers more than the encounter was billed, so the uncovered residual is never negative",
