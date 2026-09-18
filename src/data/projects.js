@@ -46,7 +46,7 @@ export const projects = [
       "Cross-account scanning via STS assume-role, tag-scoped IAM, and CloudFormation onboarding templates",
       "Guided cleanup behind seven gates: off by default, admin-only, typed confirmation, dry-run default, live precondition re-check, write-ahead audit",
       "Scan history, diffs between scans, and alerts for new billable or riskier resources",
-      "219 offline backend tests (moto) + 65 frontend tests; the demo bundle carries no API client and no credentials, asserted in CI",
+      "291 offline backend tests (moto) + 160 frontend tests; the demo bundle carries no API client and no credentials, asserted in CI",
     ],
     actions: [
       {
