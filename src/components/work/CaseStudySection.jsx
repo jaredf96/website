@@ -30,7 +30,13 @@ export default function CaseStudySection({ section }) {
           }`}
         >
           {(Array.isArray(section.media) ? section.media : [section.media]).map((m) => (
-            <MediaPlaceholder key={m.label} media={m} />
+            <MediaPlaceholder
+              key={m.label}
+              media={m}
+              // A screen recording of a dense UI is already hard to read; half a
+              // column would finish the job. Video takes the full width.
+              className={m.kind === "video" ? "lg:col-span-2" : ""}
+            />
           ))}
         </div>
       )}

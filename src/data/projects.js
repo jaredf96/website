@@ -113,6 +113,73 @@ export const projects = [
           ],
           media: [
             {
+              // The cut is silent: it has no audio track at all, which is why
+              // `note` exists. When the narrated version lands it is a drop-in
+              // of the same length and dimensions, so the swap is: replace the
+              // file, add `captions: "/media/shut-it-down-walkthrough.vtt"`,
+              // delete `note`. The timestamps below are pinned to this exact
+              // cut and survive it unchanged.
+              kind: "video",
+              src: "/media/shut-it-down-walkthrough.mp4",
+              poster: "/images/shut-it-down-walkthrough-poster.jpg",
+              width: 1920,
+              height: 1080,
+              duration: "2 min",
+              note: "No narration yet.",
+              label:
+                "The live cross-account path end to end: verify the two accounts are different, scan the second one, then watch AWS refuse a cleanup that cleared every gate.",
+              chapters: [
+                {
+                  at: "0:00",
+                  seconds: 0,
+                  title: "Identity",
+                  body: "A terminal proves the account running the scanner is not the account about to be scanned.",
+                },
+                {
+                  at: "0:10",
+                  seconds: 10.04,
+                  title: "Trust policy",
+                  body: "The IAM role in the target account. It trusts one specific role, and demands an external ID.",
+                },
+                {
+                  at: "0:26",
+                  seconds: 26.24,
+                  title: "Register and scan",
+                  body: "The account is added in the dashboard, then a real scan fans out across regions. Findings land tagged with the account they came from, with costs and risk.",
+                },
+                {
+                  at: "0:52",
+                  seconds: 52.6,
+                  title: "The assume-role, in the app log",
+                  body: "The scanner's own log line for the STS session it opened.",
+                },
+                {
+                  at: "1:00",
+                  seconds: 60.4,
+                  title: "The same session, in AWS's records",
+                  body: "That session again in the target account's CloudTrail, this time from the other side.",
+                },
+                {
+                  at: "1:13",
+                  seconds: 73.8,
+                  title: "Cleanup refused",
+                  body: "Every in-app safety gate is cleared, and IAM refuses the call anyway, because the role cannot write.",
+                },
+                {
+                  at: "1:32",
+                  seconds: 92.96,
+                  title: "The refusal, recorded",
+                  body: "The audit trail carrying both the attempt and the refusal.",
+                },
+                {
+                  at: "1:43",
+                  seconds: 103.96,
+                  title: "The public demo",
+                  body: "The clickable demo is fixture data, deployed separately from the live path.",
+                },
+              ],
+            },
+            {
               kind: "image",
               src: "/images/shut-it-down-scan.png",
               width: 1001,
