@@ -211,7 +211,7 @@ export const projects = [
     },
     repoNote: null,
     summary:
-      "A dbt project over synthetic electronic health record data: six staged source feeds, a star schema of seven dimensions and two facts at 61,459 encounters and 38,094 conditions that share conformed patient and date dimensions, 207 data-quality tests, the HIPAA Safe Harbor de-identification rules for names, geography, dates and ages over 89 enforced by five tests, and CI that builds all of it and publishes the generated documentation on every push. It runs on DuckDB with no account and no credentials: a script fetches the ~565 MB source export once, and the dbt build over it takes under two seconds.",
+      "A dbt project over synthetic electronic health record data: six staged source feeds, a star schema of seven dimensions and two facts at 61,459 encounters and 38,094 conditions that share conformed patient and date dimensions, 207 data-quality tests, the HIPAA Safe Harbor de-identification rules for names, geography, dates and ages over 89 enforced by five tests, and CI that builds all of it and publishes the generated documentation on every push. It runs on DuckDB with no account and no credentials: a script fetches the ~565 MB source export once, and dbt reports the build over it running in under two seconds on a laptop.",
     context:
       "Healthcare analytics work is mostly the unglamorous middle: turning a raw clinical export into models other people can trust, then proving they can. This project does that end to end on Synthea data, which is entirely synthetic and carries no PHI while keeping the shape of a real EHR export.",
     role: "Solo. Sources, staging, dimensional design, tests, documentation and CI.",
@@ -231,8 +231,8 @@ export const projects = [
       "HIPAA Safe Harbor's rules for names, geography, dates and ages over 89 applied in the patient dimension and enforced by five tests, because a test of column names was not enough. It catches a forbidden column, but not a permitted birth year sitting beside a capped age, where one subtraction undoes the cap, and not a full ZIP published under the name zip3. The others read the data: the ZIP prefix, and the over-89 rule across every date both facts publish. What none of the five proves is stated beside them: the facts keep exact service dates on purpose, and the dimension's key is the source system's own patient identifier, so what is claimed is the rules the dimension applies, not a Safe Harbor data set",
       "Known generator defects are priced, not hidden: 165 of 61,459 encounters start after the patient's recorded death date, and 1 of the 1,728 inpatient stays runs 4,969 days. Each test pins the count it tolerates and errors above it, so the numbers are reported every run and a 166th post-death encounter fails the build rather than warning louder. A review caught that a bare warn severity does not do this, which is its own entry in the decision log",
       "A count of conditions is not a count of diagnoses, and the model says so: 29,749 of the 38,094 rows are SNOMED findings rather than disorders, and the most common code in the whole fact is Full-time employment",
-      "No model reads the clock, so every number in the README is reproducible from a build on any machine on any day",
-      "A decision log of 28 entries, most of them recording what was decided against or what would reopen it",
+      "No model reads the clock, so a build produces the same numbers on any machine on any day, and a figure the build does not produce says where it comes from: the profiles of the three feeds no model reads are analyses CI runs after every build",
+      "A decision log of 29 entries, most of them recording what was decided against or what would reopen it",
     ],
     actions: [
       {
@@ -261,7 +261,7 @@ export const projects = [
             "The source is Synthea, MITRE's synthetic patient generator: 1,163 patients across 18 CSV files, about 565 MB, fetched by a checksum-pinned script that uses only the standard library. dbt-duckdb reads the CSVs in place, so there is no load step and no credentials.",
           ],
           bullets: [
-            "Six staging models, one per feed, that rename and cast and do nothing else: no filtering, no derived columns, so the boundary between source and interpretation stays visible",
+            "Six staging models, one per feed the marts read, that rename and cast and do nothing else: no filtering, no derived columns, so the boundary between source and interpretation stays visible",
             "Sources arrive as text and every cast is deliberate. ZIP codes stay text because leading zeros are real; money is decimal(18, 2); coordinates are double",
             "Timestamps stay UTC rather than becoming timestamptz, so the same CSV builds identical values on a laptop and on a CI runner",
           ],
